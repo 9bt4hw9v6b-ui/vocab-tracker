@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拾词 · 每日背词与遗忘曲线复习</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1b2140;
+    --bg-alt:#242b52;
+    --bg-alt2:#2c3560;
+    --paper:#f4ecda;
+    --paper-alt:#ece0c4;
+    --ink:#2b2440;
+    --ink-soft:#655d78;
+    --gold:#c9a24b;
+    --gold-soft:#e3c778;
+    --teal:#3f8f82;
+    --coral:#c1554d;
+    --blue-gray:#6b7fa3;
+    --line:rgba(201,162,75,0.28);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 15% 0%, #2a3266 0%, transparent 45%),
+      radial-gradient(circle at 90% 100%, #232a52 0%, transparent 40%),
+      var(--bg);
+    color:var(--paper);
+    font-family:'Noto Sans SC', sans-serif;
+    min-height:100vh;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:32px 20px 80px;}
+
+  header{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    flex-wrap:wrap;gap:16px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:20px;margin-bottom:28px;
+  }
+  header h1{
+    font-family:'Noto Serif SC', serif;
+    font-weight:700;font-size:30px;margin:0 0 4px;
+    letter-spacing:2px;color:var(--gold-soft);
+  }
+  header p{margin:0;color:var(--paper-alt);opacity:0.65;font-size:13px;letter-spacing:1px;}
+  .stats{display:flex;gap:10px;flex-wrap:wrap;}
+  .stat-chip{
+    background:var(--bg-alt2);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:8px 14px;
+    text-align:center;min-width:76px;
+  }
+  .stat-chip b{display:block;font-family:'Noto Serif SC',serif;font-size:20px;color:var(--gold-soft);}
+  .stat-chip span{font-size:11px;color:var(--paper-alt);opacity:0.7;}
+
+  .layout{display:grid;grid-template-columns:260px 1fr;gap:24px;}
+  @media (max-width:800px){.layout{grid-template-columns:1fr;}}
+
+  .panel{
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:18px;
+  }
+  .panel + .panel{margin-top:20px;}
+  .panel h2{
+    font-family:'Noto Serif SC',serif;font-size:15px;margin:0 0 12px;
+    color:var(--gold-soft);letter-spacing:1px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .panel h2::before{content:'';width:10px;height:1px;background:var(--gold);}
+
+  label{display:block;font-size:12px;color:var(--paper-alt);opacity:0.75;margin:10px 0 5px;}
+  input[type=date], textarea{
+    width:100%;background:var(--bg);color:var(--paper);
+    border:1px solid var(--line);border-radius:4px;
+    padding:8px 10px;font-family:'Noto Sans SC',sans-serif;font-size:13px;
+  }
+  textarea{min-height:110px;resize:vertical;line-height:1.6;}
+  input[type=date]{font-family:'Noto Sans SC',sans-serif;}
+  .hint{font-size:11px;color:var(--paper-alt);opacity:0.55;margin-top:5px;}
+
+  button{
+    cursor:pointer;font-family:'Noto Sans SC',sans-serif;
+    border-radius:4px;border:1px solid var(--line);
+    background:var(--bg-alt2);color:var(--paper);
+    padding:9px 14px;font-size:13px;letter-spacing:0.5px;
+    transition:background .15s, border-color .15s;
+  }
+  button:hover{border-color:var(--gold);background:#333c6e;}
+  .btn-primary{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:700;}
+  .btn-primary:hover{background:var(--gold-soft);}
+  .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+
+  .day-list{list-style:none;margin:0;padding:0;max-height:340px;overflow-y:auto;}
+  .day-list li{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:9px 8px;border-radius:4px;cursor:pointer;
+    font-size:13px;color:var(--paper-alt);
+  }
+  .day-list li:hover{background:var(--bg-alt2);}
+  .day-list li.active{background:var(--bg-alt2);color:var(--gold-soft);font-weight:700;}
+  .day-list li .cnt{font-size:11px;opacity:0.6;font-family:'JetBrains Mono',monospace;}
+
+  .tabs{display:flex;gap:6px;margin-bottom:18px;}
+  .tab-btn{
+    background:transparent;border:1px solid var(--line);
+    padding:8px 16px;border-radius:20px;font-size:13px;color:var(--paper-alt);
+  }
+  .tab-btn.active{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:700;}
+
+  .main-panel{min-height:400px;}
+  .main-panel-head{
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:10px;margin-bottom:16px;
+  }
+  .main-panel-head h2{margin:0;font-size:16px;}
+  .empty{
+    color:var(--paper-alt);opacity:0.55;font-size:13px;
+    padding:40px 10px;text-align:center;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(108px,1fr));
+    gap:12px;
+  }
+
+  .word-card{
+    position:relative;
+    background:var(--paper);
+    color:var(--ink);
+    border-radius:3px;
+    padding:12px 10px 10px;
+    min-height:64px;
+    cursor:pointer;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    font-weight:700;
+    word-break:break-word;
+    box-shadow:0 3px 0 rgba(0,0,0,0.18);
+    border:1px dashed rgba(43,36,64,0.25);
+    transition:transform .1s;
+    user-select:none;
+  }
+  .word-card:hover{transform:translateY(-2px);}
+  .word-card .stamp{
+    position:absolute;top:-7px;right:-7px;
+    width:20px;height:20px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:10px;font-weight:700;color:#fff;
+    font-family:'Noto Sans SC',sans-serif;
+    border:2px solid var(--bg-alt);
+    transform:rotate(-8deg);
+  }
+  .word-card .rc{
+    margin-top:8px;font-size:10px;font-weight:400;
+    color:var(--ink-soft);letter-spacing:0.5px;
+    font-family:'Noto Sans SC',sans-serif;
+  }
+  .st-new .stamp{background:var(--blue-gray);}
+  .st-new{border-color:rgba(107,127,163,0.4);}
+  .st-reviewed .stamp{background:var(--coral);}
+  .st-reviewed{border-color:rgba(193,85,77,0.4);}
+  .st-mastered .stamp{background:var(--teal);}
+  .st-mastered{border-color:rgba(63,143,130,0.4); opacity:0.75;}
+
+  .del-x{
+    position:absolute;bottom:-6px;left:-6px;
+    width:16px;height:16px;border-radius:50%;
+    background:var(--bg);color:var(--paper-alt);
+    font-size:10px;line-height:16px;text-align:center;
+    display:none;
+  }
+  .word-card:hover .del-x{display:block;}
+
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--paper-alt);opacity:0.75;margin-top:16px;}
+  .legend span{display:inline-flex;align-items:center;gap:5px;}
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+
+  footer{
+    margin-top:30px;border-top:1px solid var(--line);
+    padding-top:18px;display:flex;justify-content:space-between;
+    flex-wrap:wrap;gap:10px;align-items:center;
+  }
+  footer p{font-size:11px;color:var(--paper-alt);opacity:0.5;margin:0;}
+  .import-label{
+    display:inline-block;padding:9px 14px;border:1px solid var(--line);
+    border-radius:4px;font-size:13px;cursor:pointer;
+  }
+  .import-label:hover{border-color:var(--gold);}
+  #importFile{display:none;}
+
+  ::-webkit-scrollbar{width:8px;}
+  ::-webkit-scrollbar-thumb{background:var(--bg-alt2);border-radius:4px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>拾 词</h1>
+      <p>每日新词记录 · 按艾宾浩斯遗忘曲线安排复习</p>
+    </div>
+    <div class="stats" id="statsRow"></div>
+  </header>
+
+  <div class="layout">
+    <div>
+      <div class="panel">
+        <h2>添加今日单词</h2>
+        <label for="dateInput">日期</label>
+        <input type="date" id="dateInput">
+        <label for="wordsInput">单词（换行 / 逗号 / 空格 分隔均可）</label>
+        <textarea id="wordsInput" placeholder="例如：&#10;abandon&#10;benevolent, candid&#10;diligent"></textarea>
+        <div class="hint">建议每天 35–60 个，也可分多次追加到同一天</div>
+        <div class="btn-row">
+          <button class="btn-primary" id="addBtn">加入词表</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>按日期浏览</h2>
+        <ul class="day-list" id="dayList"></ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="review" id="tabReview">今日待复习</button>
+        <button class="tab-btn" data-tab="day" id="tabDay">按日查看</button>
+      </div>
+
+      <div class="panel main-panel">
+        <div class="main-panel-head">
+          <h2 id="mainTitle">今日待复习</h2>
+          <div class="btn-row" id="mainActions"></div>
+        </div>
+        <div id="mainBody"></div>
+        <div class="legend">
+          <span><i class="dot" style="background:var(--blue-gray)"></i>未复习</span>
+          <span><i class="dot" style="background:var(--coral)"></i>复习中（未到掌握）</span>
+          <span><i class="dot" style="background:var(--teal)"></i>已掌握</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>数据仅保存在本浏览器（localStorage），换设备/清缓存前请导出备份</p>
+    <div class="btn-row" style="margin-top:0;">
+      <button id="exportCsv">导出 CSV</button>
+      <button id="exportJson">导出 JSON 备份</button>
+      <label class="import-label" for="importFile">导入 JSON 备份</label>
+      <input type="file" id="importFile" accept="application/json">
+    </div>
+  </footer>
+</div>
+
+<script>
+// ---------- 基础配置 ----------
+const STORAGE_KEY = 'shici-vocab-data-v1';
+const INTERVALS = [1,2,4,7,15,30]; // 艾宾浩斯复习间隔（天）
+
+// ---------- 数据层 ----------
+function loadData(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return {days:{}};
+    return JSON.parse(raw);
+  }catch(e){ return {days:{}}; }
+}
+function saveData(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+let state = loadData();
+
+// ---------- 日期工具 ----------
+function todayISO(){
+  const d = new Date();
+  return isoLocal(d);
+}
+function isoLocal(d){
+  const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+function addDays(iso, n){
+  const d = new Date(iso+'T00:00:00');
+  d.setDate(d.getDate()+n);
+  return isoLocal(d);
+}
+function daysBetween(a,b){
+  const da=new Date(a+'T00:00:00'), db=new Date(b+'T00:00:00');
+  return Math.round((db-da)/86400000);
+}
+
+// ---------- 单词模型 ----------
+// word: {id, text, status: 'new'|'reviewed'|'mastered', reviewCount, lastReviewDate}
+function makeId(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+
+function nextDueDate(word, dateAdded){
+  const base = word.lastReviewDate || dateAdded;
+  const idx = Math.min(word.reviewCount, INTERVALS.length-1);
+  return addDays(base, INTERVALS[idx]);
+}
+
+function isDueToday(word, dateAdded){
+  if(word.status === 'mastered') return false;
+  const due = nextDueDate(word, dateAdded);
+  return due <= todayISO();
+}
+
+// ---------- 添加单词 ----------
+document.getElementById('dateInput').value = todayISO();
+
+document.getElementById('addBtn').addEventListener('click', ()=>{
+  const dateVal = document.getElementById('dateInput').value || todayISO();
+  const raw = document.getElementById('wordsInput').value;
+  const words = raw.split(/[\n,，、\s]+/).map(w=>w.trim()).filter(Boolean);
+  if(words.length===0){ alert('请先输入单词～'); return; }
+  if(!state.days[dateVal]) state.days[dateVal] = [];
+  words.forEach(w=>{
+    state.days[dateVal].push({id:makeId(), text:w, status:'new', reviewCount:0, lastReviewDate:null});
+  });
+  document.getElementById('wordsInput').value='';
+  saveData();
+  renderAll();
+});
+
+// ---------- Tab 状态 ----------
+let currentTab = 'review';
+let selectedDate = null;
+let shuffleSeed = null;
+
+document.getElementById('tabReview').addEventListener('click', ()=>{ currentTab='review'; setActiveTab(); renderMain(); });
+document.getElementById('tabDay').addEventListener('click', ()=>{ currentTab='day'; setActiveTab(); renderMain(); });
+
+function setActiveTab(){
+  document.getElementById('tabReview').classList.toggle('active', currentTab==='review');
+  document.getElementById('tabDay').classList.toggle('active', currentTab==='day');
+}
+
+// ---------- 渲染：统计条 ----------
+function renderStats(){
+  let totalWords=0, dueToday=0, mastered=0, todayNew=0;
+  const t = todayISO();
+  Object.entries(state.days).forEach(([date, words])=>{
+    words.forEach(w=>{
+      totalWords++;
+      if(w.status==='mastered') mastered++;
+      if(isDueToday(w, date)) dueToday++;
+    });
+    if(date===t) todayNew += words.length;
+  });
+  const chips = [
+    ['总词数', totalWords],
+    ['今日新词', todayNew],
+    ['待复习', dueToday],
+    ['已掌握', mastered],
+  ];
+  document.getElementById('statsRow').innerHTML = chips.map(([label,val])=>
+    `<div class="stat-chip"><b>${val}</b><span>${label}</span></div>`
+  ).join('');
+}
+
+// ---------- 渲染：日期侧栏 ----------
+function renderDayList(){
+  const dates = Object.keys(state.days).sort().reverse();
+  const list = document.getElementById('dayList');
+  if(dates.length===0){
+    list.innerHTML = '<li style="opacity:.5;cursor:default;">还没有记录，先在左上添加一天的单词吧</li>';
+    return;
+  }
+  if(!selectedDate) selectedDate = dates[0];
+  list.innerHTML = dates.map(date=>{
+    const words = state.days[date];
+    return `<li data-date="${date}" class="${date===selectedDate?'active':''}">
+      <span>${date}</span><span class="cnt">${words.length} 词</span>
+    </li>`;
+  }).join('');
+  list.querySelectorAll('li[data-date]').forEach(li=>{
+    li.addEventListener('click', ()=>{
+      selectedDate = li.dataset.date;
+      currentTab = 'day';
+      setActiveTab();
+      renderDayList();
+      renderMain();
+    });
+  });
+}
+
+// ---------- 状态切换 ----------
+function cycleStatus(date, wordId){
+  const word = state.days[date].find(w=>w.id===wordId);
+  if(!word) return;
+  if(word.status==='new'){
+    word.status='reviewed'; word.reviewCount=1; word.lastReviewDate=todayISO();
+  } else if(word.status==='reviewed'){
+    if(word.reviewCount >= INTERVALS.length){
+      word.status='mastered';
+    } else {
+      word.reviewCount++;
+      word.lastReviewDate=todayISO();
+      if(word.reviewCount>=INTERVALS.length) word.status='mastered';
+    }
+  } else {
+    // mastered -> reset to new
+    word.status='new'; word.reviewCount=0; word.lastReviewDate=null;
+  }
+  saveData();
+  renderAll();
+}
+
+function deleteWord(date, wordId){
+  state.days[date] = state.days[date].filter(w=>w.id!==wordId);
+  if(state.days[date].length===0) delete state.days[date];
+  saveData();
+  renderAll();
+}
+
+function markReviewedFromQueue(date, wordId){
+  const word = state.days[date].find(w=>w.id===wordId);
+  if(!word) return;
+  word.reviewCount++;
+  word.lastReviewDate = todayISO();
+  word.status = word.reviewCount>=INTERVALS.length ? 'mastered' : 'reviewed';
+  saveData();
+  renderAll();
+}
+
+// ---------- 渲染单词块 ----------
+function wordCard(date, word, opts={}){
+  const stCls = word.status==='mastered' ? 'st-mastered' : (word.status==='new'?'st-new':'st-reviewed');
+  const rc = word.status==='new' ? '未复习' : (word.status==='mastered' ? '已掌握' : `第 ${word.reviewCount} 轮`);
+  const card = document.createElement('div');
+  card.className = `word-card ${stCls}`;
+  card.innerHTML = `
+    <span class="stamp">${word.status==='mastered'?'✓':word.reviewCount}</span>
+    <div>${escapeHtml(word.text)}</div>
+    <div class="rc">${rc}</div>
+    <div class="del-x">✕</div>
+  `;
+  card.addEventListener('click', (e)=>{
+    if(opts.reviewMode){
+      markReviewedFromQueue(date, word.id);
+    } else {
+      cycleStatus(date, word.id);
+    }
+  });
+  card.querySelector('.del-x').addEventListener('click', (e)=>{
+    e.stopPropagation();
+    if(confirm(`删除单词 "${word.text}"？`)) deleteWord(date, word.id);
+  });
+  return card;
+}
+function escapeHtml(s){
+  const d = document.createElement('div'); d.textContent = s; return d.innerHTML;
+}
+
+// ---------- 渲染主区域 ----------
+function renderMain(){
+  const title = document.getElementById('mainTitle');
+  const body = document.getElementById('mainBody');
+  const actions = document.getElementById('mainActions');
+  body.innerHTML = '';
+  actions.innerHTML = '';
+
+  if(currentTab === 'review'){
+    title.textContent = '今日待复习（按遗忘曲线）';
+    let queue = [];
+    Object.entries(state.days).forEach(([date, words])=>{
+      words.forEach(w=>{ if(isDueToday(w, date)) queue.push({date, word:w}); });
+    });
+    if(shuffleSeed) queue = shuffleArray(queue);
+
+    const shuffleBtn = document.createElement('button');
+    shuffleBtn.textContent = '乱序 🔀';
+    shuffleBtn.addEventListener('click', ()=>{ shuffleSeed = Math.random(); renderMain(); });
+    actions.appendChild(shuffleBtn);
+
+    if(queue.length>0){
+      const allBtn = document.createElement('button');
+      allBtn.textContent = '全部标记为已复习一轮';
+      allBtn.className='btn-primary';
+      allBtn.addEventListener('click', ()=>{
+        queue.forEach(({date,word})=>{
+          word.reviewCount++;
+          word.lastReviewDate = todayISO();
+          word.status = word.reviewCount>=INTERVALS.length ? 'mastered' : 'reviewed';
+        });
+        saveData(); renderAll();
+      });
+      actions.appendChild(allBtn);
+    }
+
+    if(queue.length===0){
+      body.innerHTML = '<div class="empty">今天没有到期需要复习的单词 🌙<br>点开「按日查看」可以浏览所有记录</div>';
+      return;
+    }
+    const grid = document.createElement('div');
+    grid.className='grid';
+    queue.forEach(({date,word})=> grid.appendChild(wordCard(date, word, {reviewMode:true})) );
+    body.appendChild(grid);
+
+  } else {
+    const dates = Object.keys(state.days).sort().reverse();
+    if(dates.length===0){
+      title.textContent = '按日查看';
+      body.innerHTML = '<div class="empty">还没有任何记录</div>';
+      return;
+    }
+    if(!selectedDate || !state.days[selectedDate]) selectedDate = dates[0];
+    title.textContent = `${selectedDate} 的单词（共 ${state.days[selectedDate].length} 个）`;
+
+    const shuffleBtn = document.createElement('button');
+    shuffleBtn.textContent = '乱序 🔀';
+    shuffleBtn.addEventListener('click', ()=>{ shuffleSeed = Math.random(); renderMain(); });
+    actions.appendChild(shuffleBtn);
+
+    let words = state.days[selectedDate].slice();
+    if(shuffleSeed) words = shuffleArray(words);
+
+    const grid = document.createElement('div');
+    grid.className='grid';
+    words.forEach(word=> grid.appendChild(wordCard(selectedDate, word, {reviewMode:false})) );
+    body.appendChild(grid);
+  }
+}
+
+function shuffleArray(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+// ---------- 导出 ----------
+document.getElementById('exportCsv').addEventListener('click', ()=>{
+  let rows = [['日期','单词','状态','复习轮数','下次到期日']];
+  Object.entries(state.days).forEach(([date, words])=>{
+    words.forEach(w=>{
+      rows.push([date, w.text, w.status, w.reviewCount, nextDueDate(w,date)]);
+    });
+  });
+  const csv = rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  downloadBlob(csv, `拾词-导出-${todayISO()}.csv`, 'text/csv;charset=utf-8;');
+});
+
+document.getElementById('exportJson').addEventListener('click', ()=>{
+  downloadBlob(JSON.stringify(state, null, 2), `拾词-备份-${todayISO()}.json`, 'application/json');
+});
+
+function downloadBlob(content, filename, type){
+  const blob = new Blob(['\uFEFF'+content], {type});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+document.getElementById('importFile').addEventListener('change', (e)=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    try{
+      const data = JSON.parse(reader.result);
+      if(!data.days) throw new Error('格式不对');
+      if(confirm('导入将与当前数据合并（相同日期会追加单词），确定继续吗？')){
+        Object.entries(data.days).forEach(([date, words])=>{
+          if(!state.days[date]) state.days[date]=[];
+          state.days[date] = state.days[date].concat(words);
+        });
+        saveData();
+        renderAll();
+        alert('导入完成！');
+      }
+    }catch(err){
+      alert('导入失败，文件格式不正确');
+    }
+    e.target.value='';
+  };
+  reader.readAsText(file);
+});
+
+// ---------- 总渲染 ----------
+function renderAll(){
+  renderStats();
+  renderDayList();
+  renderMain();
+}
+renderAll();
+</script>
+</body>
+</html>
