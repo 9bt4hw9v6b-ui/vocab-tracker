@@ -34,12 +34,12 @@
     min-height:100vh;
   }
   .wrap{max-width:1080px;margin:0 auto;padding:32px 20px 80px;}
-
+ 
   header{
     display:flex;justify-content:space-between;align-items:flex-end;
     flex-wrap:wrap;gap:16px;
     border-bottom:1px solid var(--line);
-    padding-bottom:20px;margin-bottom:28px;
+    padding-bottom:20px;margin-bottom:20px;
   }
   header h1{
     font-family:'Noto Serif SC', serif;
@@ -47,6 +47,15 @@
     letter-spacing:2px;color:var(--gold-soft);
   }
   header p{margin:0;color:var(--paper-alt);opacity:0.65;font-size:13px;letter-spacing:1px;}
+ 
+  .top-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+  .user-switch{display:flex;gap:6px;background:var(--bg-alt2);padding:4px;border-radius:20px;border:1px solid var(--line);}
+  .user-switch button{
+    border:none;background:transparent;color:var(--paper-alt);
+    padding:6px 14px;border-radius:16px;font-size:12px;letter-spacing:1px;
+  }
+  .user-switch button.active{background:var(--gold);color:var(--ink);font-weight:700;}
+ 
   .stats{display:flex;gap:10px;flex-wrap:wrap;}
   .stat-chip{
     background:var(--bg-alt2);
@@ -57,10 +66,10 @@
   }
   .stat-chip b{display:block;font-family:'Noto Serif SC',serif;font-size:20px;color:var(--gold-soft);}
   .stat-chip span{font-size:11px;color:var(--paper-alt);opacity:0.7;}
-
+ 
   .layout{display:grid;grid-template-columns:260px 1fr;gap:24px;}
   @media (max-width:800px){.layout{grid-template-columns:1fr;}}
-
+ 
   .panel{
     background:var(--bg-alt);
     border:1px solid var(--line);
@@ -74,17 +83,16 @@
     display:flex;align-items:center;gap:8px;
   }
   .panel h2::before{content:'';width:10px;height:1px;background:var(--gold);}
-
+ 
   label{display:block;font-size:12px;color:var(--paper-alt);opacity:0.75;margin:10px 0 5px;}
-  input[type=date], textarea{
+  input[type=date], textarea, select{
     width:100%;background:var(--bg);color:var(--paper);
     border:1px solid var(--line);border-radius:4px;
     padding:8px 10px;font-family:'Noto Sans SC',sans-serif;font-size:13px;
   }
   textarea{min-height:110px;resize:vertical;line-height:1.6;}
-  input[type=date]{font-family:'Noto Sans SC',sans-serif;}
   .hint{font-size:11px;color:var(--paper-alt);opacity:0.55;margin-top:5px;}
-
+ 
   button{
     cursor:pointer;font-family:'Noto Sans SC',sans-serif;
     border-radius:4px;border:1px solid var(--line);
@@ -96,7 +104,7 @@
   .btn-primary{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:700;}
   .btn-primary:hover{background:var(--gold-soft);}
   .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
-
+ 
   .day-list{list-style:none;margin:0;padding:0;max-height:340px;overflow-y:auto;}
   .day-list li{
     display:flex;justify-content:space-between;align-items:center;
@@ -106,14 +114,14 @@
   .day-list li:hover{background:var(--bg-alt2);}
   .day-list li.active{background:var(--bg-alt2);color:var(--gold-soft);font-weight:700;}
   .day-list li .cnt{font-size:11px;opacity:0.6;font-family:'JetBrains Mono',monospace;}
-
-  .tabs{display:flex;gap:6px;margin-bottom:18px;}
+ 
+  .tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap;}
   .tab-btn{
     background:transparent;border:1px solid var(--line);
     padding:8px 16px;border-radius:20px;font-size:13px;color:var(--paper-alt);
   }
   .tab-btn.active{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:700;}
-
+ 
   .main-panel{min-height:400px;}
   .main-panel-head{
     display:flex;justify-content:space-between;align-items:center;
@@ -124,13 +132,13 @@
     color:var(--paper-alt);opacity:0.55;font-size:13px;
     padding:40px 10px;text-align:center;
   }
-
+ 
   .grid{
     display:grid;
     grid-template-columns:repeat(auto-fill, minmax(108px,1fr));
     gap:12px;
   }
-
+ 
   .word-card{
     position:relative;
     background:var(--paper);
@@ -169,7 +177,7 @@
   .st-reviewed{border-color:rgba(193,85,77,0.4);}
   .st-mastered .stamp{background:var(--teal);}
   .st-mastered{border-color:rgba(63,143,130,0.4); opacity:0.75;}
-
+ 
   .del-x{
     position:absolute;bottom:-6px;left:-6px;
     width:16px;height:16px;border-radius:50%;
@@ -178,11 +186,44 @@
     display:none;
   }
   .word-card:hover .del-x{display:block;}
-
+ 
   .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--paper-alt);opacity:0.75;margin-top:16px;}
   .legend span{display:inline-flex;align-items:center;gap:5px;}
   .dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
-
+ 
+  /* List 卡片（今日待复习分组）*/
+  .list-card{
+    border:1px solid var(--line);border-radius:6px;margin-bottom:12px;overflow:hidden;
+    background:var(--bg-alt2);
+  }
+  .list-card-head{
+    display:flex;justify-content:space-between;align-items:center;
+        padding:12px 14px;cursor:pointer;
+  }
+  .list-card-head:hover{background:#333c6e;}
+  .list-card-head .lc-title{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold-soft);font-weight:700;}
+  .list-card-head .lc-progress{font-size:12px;color:var(--paper-alt);opacity:0.75;}
+  .list-card-head .lc-chevron{transition:transform .15s;opacity:0.6;}
+  .list-card.open .lc-chevron{transform:rotate(90deg);}
+  .list-card-body{padding:0 14px 14px;display:none;}
+  .list-card.open .list-card-body{display:block;}
+ 
+  /* 复习预告 */
+  .forecast-range{display:flex;gap:8px;margin-bottom:16px;}
+  .forecast-range button.active{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:700;}
+  .forecast-day{
+    border-left:2px solid var(--line);padding:4px 0 14px 16px;margin-left:6px;position:relative;
+  }
+  .forecast-day::before{
+    content:'';position:absolute;left:-5px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--gold);
+  }
+  .forecast-day .fd-date{font-family:'Noto Serif SC',serif;color:var(--gold-soft);font-size:14px;margin-bottom:6px;}
+  .forecast-chip{
+    display:inline-block;background:var(--bg-alt2);border:1px solid var(--line);
+    border-radius:4px;padding:4px 10px;font-size:12px;margin:0 6px 6px 0;color:var(--paper-alt);
+  }
+  .forecast-chip b{color:var(--gold-soft);font-family:'JetBrains Mono',monospace;}
+ 
   footer{
     margin-top:30px;border-top:1px solid var(--line);
     padding-top:18px;display:flex;justify-content:space-between;
@@ -195,22 +236,43 @@
   }
   .import-label:hover{border-color:var(--gold);}
   #importFile{display:none;}
-
+ 
+  /* 弹窗 */
+  .modal-overlay{
+    display:none;position:fixed;inset:0;background:rgba(10,12,28,0.7);
+    z-index:100;align-items:center;justify-content:center;padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:var(--bg-alt);border:1px solid var(--line);border-radius:8px;
+    padding:22px;max-width:420px;width:100%;
+  }
+  .modal-box h3{margin:0 0 14px;font-family:'Noto Serif SC',serif;color:var(--gold-soft);font-size:17px;}
+  .radio-row{display:flex;align-items:center;gap:8px;margin:10px 0;font-size:13px;}
+  .radio-row input{width:auto;}
+  .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px;}
+ 
   ::-webkit-scrollbar{width:8px;}
   ::-webkit-scrollbar-thumb{background:var(--bg-alt2);border-radius:4px;}
 </style>
 </head>
 <body>
 <div class="wrap">
-
+ 
   <header>
     <div>
       <h1>拾 词</h1>
-      <p>每日新词记录 · 按艾宾浩斯遗忘曲线安排复习</p>
+      <p>每日新词记录 · 按遗忘曲线安排复习</p>
     </div>
-    <div class="stats" id="statsRow"></div>
+    <div class="top-right">
+      <div class="user-switch">
+        <button data-user="student" id="userStudentBtn">学生</button>
+        <button data-user="me" id="userMeBtn">我</button>
+      </div>
+      <div class="stats" id="statsRow"></div>
+    </div>
   </header>
-
+ 
   <div class="layout">
     <div>
       <div class="panel">
@@ -224,26 +286,36 @@
           <button class="btn-primary" id="addBtn">加入词表</button>
         </div>
       </div>
-
+ 
       <div class="panel">
         <h2>按日期浏览</h2>
         <ul class="day-list" id="dayList"></ul>
       </div>
+ 
+      <div class="panel">
+        <h2>导出</h2>
+        <div class="btn-row" style="margin-top:0;">
+          <button id="openExportModal">📝 默写表 (Word)</button>
+          <button id="exportCsv">导出 CSV</button>
+          <button id="exportJson">导出 JSON 备份</button>
+        </div>
+      </div>
     </div>
-
+ 
     <div>
       <div class="tabs">
         <button class="tab-btn active" data-tab="review" id="tabReview">今日待复习</button>
         <button class="tab-btn" data-tab="day" id="tabDay">按日查看</button>
+        <button class="tab-btn" data-tab="forecast" id="tabForecast">复习预告</button>
       </div>
-
+ 
       <div class="panel main-panel">
         <div class="main-panel-head">
           <h2 id="mainTitle">今日待复习</h2>
           <div class="btn-row" id="mainActions"></div>
         </div>
         <div id="mainBody"></div>
-        <div class="legend">
+        <div class="legend" id="mainLegend">
           <span><i class="dot" style="background:var(--blue-gray)"></i>未复习</span>
           <span><i class="dot" style="background:var(--coral)"></i>复习中（未到掌握）</span>
           <span><i class="dot" style="background:var(--teal)"></i>已掌握</span>
@@ -251,41 +323,75 @@
       </div>
     </div>
   </div>
-
+ 
   <footer>
     <p>数据仅保存在本浏览器（localStorage），换设备/清缓存前请导出备份</p>
     <div class="btn-row" style="margin-top:0;">
-      <button id="exportCsv">导出 CSV</button>
-      <button id="exportJson">导出 JSON 备份</button>
       <label class="import-label" for="importFile">导入 JSON 备份</label>
       <input type="file" id="importFile" accept="application/json">
     </div>
   </footer>
 </div>
-
+ 
+<!-- 导出默写表弹窗 -->
+<div class="modal-overlay" id="exportModal">
+  <div class="modal-box">
+    <h3>导出默写表 (Word)</h3>
+    <div class="radio-row">
+      <input type="radio" name="exportScope" id="scopeList" value="list" checked>
+      <label style="margin:0;" for="scopeList">指定某天 List</label>
+    </div>
+    <select id="scopeListSelect"></select>
+    <div class="radio-row">
+      <input type="radio" name="exportScope" id="scopeDue" value="due">
+      <label style="margin:0;" for="scopeDue">今日待复习（全部到期单词）</label>
+    </div>
+    <div class="radio-row" style="margin-top:16px;">
+      <input type="checkbox" id="shuffleExport" checked>
+      <label style="margin:0;" for="shuffleExport">导出前随机打乱顺序</label>
+    </div>
+    <div class="modal-actions">
+      <button id="cancelExport">取消</button>
+      <button class="btn-primary" id="confirmExport">生成并下载</button>
+    </div>
+  </div>
+</div>
+ 
 <script>
 // ---------- 基础配置 ----------
-const STORAGE_KEY = 'shici-vocab-data-v1';
-const INTERVALS = [1,2,4,7,15,30]; // 艾宾浩斯复习间隔（天）
-
-// ---------- 数据层 ----------
+const V2_KEY = 'shici-vocab-data-v2';
+const V1_KEY = 'shici-vocab-data-v1';
+const INTERVALS = [1,2,4,7,11,15,21,30]; // 复习间隔（天），共 8 轮判定掌握
+ 
+// ---------- 数据层（含从 v1 单用户格式迁移）----------
 function loadData(){
   try{
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if(!raw) return {days:{}};
-    return JSON.parse(raw);
-  }catch(e){ return {days:{}}; }
+    const rawV2 = localStorage.getItem(V2_KEY);
+    if(rawV2) return JSON.parse(rawV2);
+  }catch(e){}
+  let migratedDays = {};
+  try{
+    const rawV1 = localStorage.getItem(V1_KEY);
+    if(rawV1){
+      const old = JSON.parse(rawV1);
+      if(old && old.days) migratedDays = old.days;
+    }
+  }catch(e){}
+  return { activeUser:'student', users:{ student:{days:migratedDays}, me:{days:{}} } };
 }
 function saveData(){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  localStorage.setItem(V2_KEY, JSON.stringify(state));
 }
 let state = loadData();
-
-// ---------- 日期工具 ----------
-function todayISO(){
-  const d = new Date();
-  return isoLocal(d);
+if(!state.users) state.users = {student:{days:{}}, me:{days:{}}};
+if(!state.activeUser) state.activeUser = 'student';
+ 
+function currentDays(){
+  return state.users[state.activeUser].days;
 }
+ 
+// ---------- 日期工具 ----------
+function todayISO(){ return isoLocal(new Date()); }
 function isoLocal(d){
   const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0');
   return `${y}-${m}-${day}`;
@@ -295,62 +401,75 @@ function addDays(iso, n){
   d.setDate(d.getDate()+n);
   return isoLocal(d);
 }
-function daysBetween(a,b){
-  const da=new Date(a+'T00:00:00'), db=new Date(b+'T00:00:00');
-  return Math.round((db-da)/86400000);
-}
-
+ 
 // ---------- 单词模型 ----------
-// word: {id, text, status: 'new'|'reviewed'|'mastered', reviewCount, lastReviewDate}
 function makeId(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
-
+ 
 function nextDueDate(word, dateAdded){
   const base = word.lastReviewDate || dateAdded;
   const idx = Math.min(word.reviewCount, INTERVALS.length-1);
   return addDays(base, INTERVALS[idx]);
 }
-
 function isDueToday(word, dateAdded){
   if(word.status === 'mastered') return false;
-  const due = nextDueDate(word, dateAdded);
-  return due <= todayISO();
+  return nextDueDate(word, dateAdded) <= todayISO();
 }
-
+ 
+// ---------- 用户切换 ----------
+function setActiveUser(u){
+  state.activeUser = u;
+  selectedDate = null;
+  expandedLists = new Set();
+  saveData();
+  document.getElementById('userStudentBtn').classList.toggle('active', u==='student');
+  document.getElementById('userMeBtn').classList.toggle('active', u==='me');
+  document.getElementById('dateInput').value = todayISO();
+  renderAll();
+}
+document.getElementById('userStudentBtn').addEventListener('click', ()=>setActiveUser('student'));
+document.getElementById('userMeBtn').addEventListener('click', ()=>setActiveUser('me'));
+ 
 // ---------- 添加单词 ----------
 document.getElementById('dateInput').value = todayISO();
-
 document.getElementById('addBtn').addEventListener('click', ()=>{
   const dateVal = document.getElementById('dateInput').value || todayISO();
   const raw = document.getElementById('wordsInput').value;
   const words = raw.split(/[\n,，、\s]+/).map(w=>w.trim()).filter(Boolean);
   if(words.length===0){ alert('请先输入单词～'); return; }
-  if(!state.days[dateVal]) state.days[dateVal] = [];
+  const days = currentDays();
+  if(!days[dateVal]) days[dateVal] = [];
   words.forEach(w=>{
-    state.days[dateVal].push({id:makeId(), text:w, status:'new', reviewCount:0, lastReviewDate:null});
+    days[dateVal].push({id:makeId(), text:w, status:'new', reviewCount:0, lastReviewDate:null});
   });
   document.getElementById('wordsInput').value='';
   saveData();
   renderAll();
 });
-
+ 
 // ---------- Tab 状态 ----------
 let currentTab = 'review';
 let selectedDate = null;
 let shuffleSeed = null;
-
+let expandedLists = new Set();
+let forecastRange = 7;
+ 
 document.getElementById('tabReview').addEventListener('click', ()=>{ currentTab='review'; setActiveTab(); renderMain(); });
 document.getElementById('tabDay').addEventListener('click', ()=>{ currentTab='day'; setActiveTab(); renderMain(); });
-
+document.getElementById('tabForecast').addEventListener('click', ()=>{ currentTab='forecast'; setActiveTab(); renderMain(); });
+ 
 function setActiveTab(){
   document.getElementById('tabReview').classList.toggle('active', currentTab==='review');
   document.getElementById('tabDay').classList.toggle('active', currentTab==='day');
+  document.getElementById('tabForecast').classList.toggle('active', currentTab==='forecast');
+  document.getElementById('mainLegend').style.display = currentTab==='forecast' ? 'none' : 'flex';
 }
-
+ 
 // ---------- 渲染：统计条 ----------
 function renderStats(){
   let totalWords=0, dueToday=0, mastered=0, todayNew=0;
   const t = todayISO();
-  Object.entries(state.days).forEach(([date, words])=>{
+  const days = currentDays();
+  Object.entries(days).forEach(([date, words])=>{
     words.forEach(w=>{
       totalWords++;
       if(w.status==='mastered') mastered++;
@@ -358,28 +477,24 @@ function renderStats(){
     });
     if(date===t) todayNew += words.length;
   });
-  const chips = [
-    ['总词数', totalWords],
-    ['今日新词', todayNew],
-    ['待复习', dueToday],
-    ['已掌握', mastered],
-  ];
+  const chips = [['总词数', totalWords],['今日新词', todayNew],['待复习', dueToday],['已掌握', mastered]];
   document.getElementById('statsRow').innerHTML = chips.map(([label,val])=>
     `<div class="stat-chip"><b>${val}</b><span>${label}</span></div>`
   ).join('');
 }
-
+ 
 // ---------- 渲染：日期侧栏 ----------
 function renderDayList(){
-  const dates = Object.keys(state.days).sort().reverse();
+  const days = currentDays();
+  const dates = Object.keys(days).sort().reverse();
   const list = document.getElementById('dayList');
   if(dates.length===0){
     list.innerHTML = '<li style="opacity:.5;cursor:default;">还没有记录，先在左上添加一天的单词吧</li>';
     return;
   }
-  if(!selectedDate) selectedDate = dates[0];
+  if(!selectedDate || !days[selectedDate]) selectedDate = dates[0];
   list.innerHTML = dates.map(date=>{
-    const words = state.days[date];
+    const words = days[date];
     return `<li data-date="${date}" class="${date===selectedDate?'active':''}">
       <span>${date}</span><span class="cnt">${words.length} 词</span>
     </li>`;
@@ -394,38 +509,34 @@ function renderDayList(){
     });
   });
 }
-
+ 
 // ---------- 状态切换 ----------
 function cycleStatus(date, wordId){
-  const word = state.days[date].find(w=>w.id===wordId);
+  const days = currentDays();
+  const word = days[date].find(w=>w.id===wordId);
   if(!word) return;
   if(word.status==='new'){
     word.status='reviewed'; word.reviewCount=1; word.lastReviewDate=todayISO();
   } else if(word.status==='reviewed'){
-    if(word.reviewCount >= INTERVALS.length){
-      word.status='mastered';
-    } else {
-      word.reviewCount++;
-      word.lastReviewDate=todayISO();
-      if(word.reviewCount>=INTERVALS.length) word.status='mastered';
-    }
+    word.reviewCount++;
+    word.lastReviewDate=todayISO();
+    if(word.reviewCount>=INTERVALS.length) word.status='mastered';
   } else {
-    // mastered -> reset to new
     word.status='new'; word.reviewCount=0; word.lastReviewDate=null;
   }
   saveData();
   renderAll();
 }
-
 function deleteWord(date, wordId){
-  state.days[date] = state.days[date].filter(w=>w.id!==wordId);
-  if(state.days[date].length===0) delete state.days[date];
+  const days = currentDays();
+  days[date] = days[date].filter(w=>w.id!==wordId);
+  if(days[date].length===0) delete days[date];
   saveData();
   renderAll();
 }
-
 function markReviewedFromQueue(date, wordId){
-  const word = state.days[date].find(w=>w.id===wordId);
+  const days = currentDays();
+  const word = days[date].find(w=>w.id===wordId);
   if(!word) return;
   word.reviewCount++;
   word.lastReviewDate = todayISO();
@@ -433,7 +544,7 @@ function markReviewedFromQueue(date, wordId){
   saveData();
   renderAll();
 }
-
+ 
 // ---------- 渲染单词块 ----------
 function wordCard(date, word, opts={}){
   const stCls = word.status==='mastered' ? 'st-mastered' : (word.status==='new'?'st-new':'st-reviewed');
@@ -446,12 +557,9 @@ function wordCard(date, word, opts={}){
     <div class="rc">${rc}</div>
     <div class="del-x">✕</div>
   `;
-  card.addEventListener('click', (e)=>{
-    if(opts.reviewMode){
-      markReviewedFromQueue(date, word.id);
-    } else {
-      cycleStatus(date, word.id);
-    }
+  card.addEventListener('click', ()=>{
+    if(opts.reviewMode) markReviewedFromQueue(date, word.id);
+    else cycleStatus(date, word.id);
   });
   card.querySelector('.del-x').addEventListener('click', (e)=>{
     e.stopPropagation();
@@ -462,77 +570,6 @@ function wordCard(date, word, opts={}){
 function escapeHtml(s){
   const d = document.createElement('div'); d.textContent = s; return d.innerHTML;
 }
-
-// ---------- 渲染主区域 ----------
-function renderMain(){
-  const title = document.getElementById('mainTitle');
-  const body = document.getElementById('mainBody');
-  const actions = document.getElementById('mainActions');
-  body.innerHTML = '';
-  actions.innerHTML = '';
-
-  if(currentTab === 'review'){
-    title.textContent = '今日待复习（按遗忘曲线）';
-    let queue = [];
-    Object.entries(state.days).forEach(([date, words])=>{
-      words.forEach(w=>{ if(isDueToday(w, date)) queue.push({date, word:w}); });
-    });
-    if(shuffleSeed) queue = shuffleArray(queue);
-
-    const shuffleBtn = document.createElement('button');
-    shuffleBtn.textContent = '乱序 🔀';
-    shuffleBtn.addEventListener('click', ()=>{ shuffleSeed = Math.random(); renderMain(); });
-    actions.appendChild(shuffleBtn);
-
-    if(queue.length>0){
-      const allBtn = document.createElement('button');
-      allBtn.textContent = '全部标记为已复习一轮';
-      allBtn.className='btn-primary';
-      allBtn.addEventListener('click', ()=>{
-        queue.forEach(({date,word})=>{
-          word.reviewCount++;
-          word.lastReviewDate = todayISO();
-          word.status = word.reviewCount>=INTERVALS.length ? 'mastered' : 'reviewed';
-        });
-        saveData(); renderAll();
-      });
-      actions.appendChild(allBtn);
-    }
-
-    if(queue.length===0){
-      body.innerHTML = '<div class="empty">今天没有到期需要复习的单词 🌙<br>点开「按日查看」可以浏览所有记录</div>';
-      return;
-    }
-    const grid = document.createElement('div');
-    grid.className='grid';
-    queue.forEach(({date,word})=> grid.appendChild(wordCard(date, word, {reviewMode:true})) );
-    body.appendChild(grid);
-
-  } else {
-    const dates = Object.keys(state.days).sort().reverse();
-    if(dates.length===0){
-      title.textContent = '按日查看';
-      body.innerHTML = '<div class="empty">还没有任何记录</div>';
-      return;
-    }
-    if(!selectedDate || !state.days[selectedDate]) selectedDate = dates[0];
-    title.textContent = `${selectedDate} 的单词（共 ${state.days[selectedDate].length} 个）`;
-
-    const shuffleBtn = document.createElement('button');
-    shuffleBtn.textContent = '乱序 🔀';
-    shuffleBtn.addEventListener('click', ()=>{ shuffleSeed = Math.random(); renderMain(); });
-    actions.appendChild(shuffleBtn);
-
-    let words = state.days[selectedDate].slice();
-    if(shuffleSeed) words = shuffleArray(words);
-
-    const grid = document.createElement('div');
-    grid.className='grid';
-    words.forEach(word=> grid.appendChild(wordCard(selectedDate, word, {reviewMode:false})) );
-    body.appendChild(grid);
-  }
-}
-
 function shuffleArray(arr){
   const a = arr.slice();
   for(let i=a.length-1;i>0;i--){
@@ -541,32 +578,180 @@ function shuffleArray(arr){
   }
   return a;
 }
-
-// ---------- 导出 ----------
-document.getElementById('exportCsv').addEventListener('click', ()=>{
-  let rows = [['日期','单词','状态','复习轮数','下次到期日']];
-  Object.entries(state.days).forEach(([date, words])=>{
+ 
+// ---------- 渲染主区域 ----------
+function renderMain(){
+  const title = document.getElementById('mainTitle');
+  const body = document.getElementById('mainBody');
+  const actions = document.getElementById('mainActions');
+  body.innerHTML = '';
+  actions.innerHTML = '';
+  const days = currentDays();
+ 
+  if(currentTab === 'review'){
+    renderReviewTab(title, body, actions, days);
+  } else if(currentTab === 'day'){
+    renderDayTab(title, body, actions, days);
+  } else {
+    renderForecastTab(title, body, actions, days);
+  }
+}
+ 
+function renderReviewTab(title, body, actions, days){
+  title.textContent = '今日待复习（按 List 分组）';
+   
+  // 按日期分组待复习单词
+  const groups = []; // {date, dueWords:[]}
+  Object.keys(days).sort().forEach(date=>{
+    const due = days[date].filter(w=>isDueToday(w, date));
+    if(due.length>0) groups.push({date, dueWords: due, total: days[date].length});
+  });
+ 
+  const shuffleBtn = document.createElement('button');
+  shuffleBtn.textContent = '乱序 🔀';
+  shuffleBtn.addEventListener('click', ()=>{ shuffleSeed = Math.random(); renderMain(); });
+  actions.appendChild(shuffleBtn);
+ 
+  if(groups.length>0){
+    const allBtn = document.createElement('button');
+    allBtn.textContent = '全部标记为已复习一轮';
+    allBtn.className='btn-primary';
+    allBtn.addEventListener('click', ()=>{
+      groups.forEach(g=>g.dueWords.forEach(word=>{
+        word.reviewCount++;
+        word.lastReviewDate = todayISO();
+        word.status = word.reviewCount>=INTERVALS.length ? 'mastered' : 'reviewed';
+      }));
+      saveData(); renderAll();
+    });
+    actions.appendChild(allBtn);
+  }
+ 
+  if(groups.length===0){
+    body.innerHTML = '<div class="empty">今天没有到期需要复习的单词 🌙<br>可以看看「复习预告」了解未来安排</div>';
+    return;
+  }
+ 
+  groups.forEach(g=>{
+    const isOpen = expandedLists.has(g.date);
+    const card = document.createElement('div');
+    card.className = 'list-card' + (isOpen ? ' open' : '');
+    const head = document.createElement('div');
+    head.className = 'list-card-head';
+    head.innerHTML = `
+      <span class="lc-title">List · ${g.date}</span>
+      <span style="display:flex;align-items:center;gap:10px;">
+        <span class="lc-progress">${g.dueWords.length}/${g.total} 待复习</span>
+        <span class="lc-chevron">▶</span>
+      </span>
+    `;
+    head.addEventListener('click', ()=>{
+      if(expandedLists.has(g.date)) expandedLists.delete(g.date);
+      else expandedLists.add(g.date);
+      renderMain();
+    });
+    const bodyDiv = document.createElement('div');
+    bodyDiv.className = 'list-card-body';
+    const grid = document.createElement('div');
+    grid.className = 'grid';
+    let words = g.dueWords;
+    if(shuffleSeed) words = shuffleArray(words);
+    words.forEach(w=> grid.appendChild(wordCard(g.date, w, {reviewMode:true})) );
+    bodyDiv.appendChild(grid);
+    card.appendChild(head);
+    card.appendChild(bodyDiv);
+    body.appendChild(card);
+  });
+}
+ 
+function renderDayTab(title, body, actions, days){
+  const dates = Object.keys(days).sort().reverse();
+  if(dates.length===0){
+    title.textContent = '按日查看';
+    body.innerHTML = '<div class="empty">还没有任何记录</div>';
+    return;
+  }
+  if(!selectedDate || !days[selectedDate]) selectedDate = dates[0];
+  title.textContent = `${selectedDate} 的单词（共 ${days[selectedDate].length} 个）`;
+ 
+  const shuffleBtn = document.createElement('button');
+  shuffleBtn.textContent = '乱序 🔀';
+  shuffleBtn.addEventListener('click', ()=>{ shuffleSeed = Math.random(); renderMain(); });
+  actions.appendChild(shuffleBtn);
+ 
+  let words = days[selectedDate].slice();
+  if(shuffleSeed) words = shuffleArray(words);
+  const grid = document.createElement('div');
+  grid.className='grid';
+  words.forEach(word=> grid.appendChild(wordCard(selectedDate, word, {reviewMode:false})) );
+  body.appendChild(grid);
+}
+ 
+function renderForecastTab(title, body, actions, days){
+  title.textContent = '复习预告';
+ 
+  const rangeWrap = document.createElement('div');
+  rangeWrap.className = 'forecast-range';
+  [7,14,30].forEach(n=>{
+    const b = document.createElement('button');
+    b.textContent = `未来 ${n} 天`;
+    if(forecastRange===n) b.classList.add('active');
+    b.addEventListener('click', ()=>{ forecastRange=n; renderMain(); });
+    rangeWrap.appendChild(b);
+  });
+  body.appendChild(rangeWrap);
+ 
+  const today = todayISO();
+  // 收集所有未掌握单词的下次到期日，按日期分组，再按来源 list 细分
+  const byDate = {}; // date -> {listDate -> count}
+  Object.entries(days).forEach(([listDate, words])=>{
     words.forEach(w=>{
-      rows.push([date, w.text, w.status, w.reviewCount, nextDueDate(w,date)]);
+      if(w.status==='mastered') return;
+      const due = nextDueDate(w, listDate);
+      if(due <= today) return; // 今天/已过期的在「今日待复习」里
+      if(due > addDays(today, forecastRange)) return;
+      if(!byDate[due]) byDate[due] = {};
+      byDate[due][listDate] = (byDate[due][listDate]||0) + 1;
     });
   });
-  const csv = rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
-  downloadBlob(csv, `拾词-导出-${todayISO()}.csv`, 'text/csv;charset=utf-8;');
-});
-
-document.getElementById('exportJson').addEventListener('click', ()=>{
-  downloadBlob(JSON.stringify(state, null, 2), `拾词-备份-${todayISO()}.json`, 'application/json');
-});
-
-function downloadBlob(content, filename, type){
-  const blob = new Blob(['\uFEFF'+content], {type});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = filename;
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+ 
+  const sortedDates = Object.keys(byDate).sort();
+  if(sortedDates.length===0){
+    const empty = document.createElement('div');
+    empty.className='empty';
+    empty.textContent = `未来 ${forecastRange} 天内暂时没有排到期的复习～`;
+    body.appendChild(empty);
+    return;
+  }
+ 
+  sortedDates.forEach(date=>{
+    const dayDiv = document.createElement('div');
+    dayDiv.className = 'forecast-day';
+    const listBreak = byDate[date];
+    const total = Object.values(listBreak).reduce((a,b)=>a+b,0);
+    dayDiv.innerHTML = `<div class="fd-date">${date}　<span style="opacity:.6;font-size:12px;">共 ${total} 词</span></div>`;
+    Object.entries(listBreak).sort().forEach(([listDate, cnt])=>{
+      const chip = document.createElement('span');
+      chip.className = 'forecast-chip';
+      chip.innerHTML = `List·${listDate} <b>${cnt}</b> 词`;
+      dayDiv.appendChild(chip);
+    });
+    body.appendChild(dayDiv);
+  });
 }
-
+ 
+// ---------- 导出：CSV / JSON ----------
+document.getElementById('exportCsv').addEventListener('click', ()=>{
+  let rows = [['日期','单词','状态','复习轮数','下次到期日']];
+  Object.entries(currentDays()).forEach(([date, words])=>{
+    words.forEach(w=> rows.push([date, w.text, w.status, w.reviewCount, nextDueDate(w,date)]) );
+  });
+  const csv = rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  downloadBlob(csv, `拾词-${state.activeUser}-导出-${todayISO()}.csv`, 'text/csv;charset=utf-8;', true);
+});
+document.getElementById('exportJson').addEventListener('click', ()=>{
+  downloadBlob(JSON.stringify(state, null, 2), `拾词-备份-${todayISO()}.json`, 'application/json', false);
+});
 document.getElementById('importFile').addEventListener('change', (e)=>{
   const file = e.target.files[0];
   if(!file) return;
@@ -574,31 +759,98 @@ document.getElementById('importFile').addEventListener('change', (e)=>{
   reader.onload = ()=>{
     try{
       const data = JSON.parse(reader.result);
-      if(!data.days) throw new Error('格式不对');
+      if(!data.users) throw new Error('格式不对');
       if(confirm('导入将与当前数据合并（相同日期会追加单词），确定继续吗？')){
-        Object.entries(data.days).forEach(([date, words])=>{
-          if(!state.days[date]) state.days[date]=[];
-          state.days[date] = state.days[date].concat(words);
+        Object.entries(data.users).forEach(([uname, udata])=>{
+          if(!state.users[uname]) state.users[uname] = {days:{}};
+          Object.entries(udata.days||{}).forEach(([date, words])=>{
+            if(!state.users[uname].days[date]) state.users[uname].days[date]=[];
+            state.users[uname].days[date] = state.users[uname].days[date].concat(words);
+          });
         });
-        saveData();
-        renderAll();
+        saveData(); renderAll();
         alert('导入完成！');
       }
-    }catch(err){
-      alert('导入失败，文件格式不正确');
-    }
+    }catch(err){ alert('导入失败，文件格式不正确'); }
     e.target.value='';
   };
   reader.readAsText(file);
 });
-
+function downloadBlob(content, filename, type, bom){
+  const blob = new Blob([bom?'\uFEFF':'', content], {type});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+ 
+// ---------- 导出：Word 默写表 ----------
+const exportModal = document.getElementById('exportModal');
+document.getElementById('openExportModal').addEventListener('click', ()=>{
+  const sel = document.getElementById('scopeListSelect');
+  const dates = Object.keys(currentDays()).sort().reverse();
+  sel.innerHTML = dates.map(d=>`<option value="${d}">${d}（${currentDays()[d].length} 词）</option>`).join('');
+  exportModal.classList.add('open');
+});
+document.getElementById('cancelExport').addEventListener('click', ()=> exportModal.classList.remove('open') );
+exportModal.addEventListener('click', (e)=>{ if(e.target===exportModal) exportModal.classList.remove('open'); });
+ 
+document.getElementById('confirmExport').addEventListener('click', ()=>{
+  const scope = document.querySelector('input[name=exportScope]:checked').value;
+  const doShuffle = document.getElementById('shuffleExport').checked;
+  const days = currentDays();
+  let words = [];
+  let label = '';
+  if(scope==='list'){
+    const d = document.getElementById('scopeListSelect').value;
+    if(!d){ alert('还没有任何 List 可以导出'); return; }
+    words = days[d].map(w=>w.text);
+    label = `List-${d}`;
+  } else {
+    Object.entries(days).forEach(([date, ws])=>{
+      ws.forEach(w=>{ if(isDueToday(w, date)) words.push(w.text); });
+    });
+    if(words.length===0){ alert('今天没有待复习的单词'); return; }
+    label = `今日待复习-${todayISO()}`;
+  }
+  if(doShuffle) words = shuffleArray(words);
+  exportDictationDoc(words, label);
+  exportModal.classList.remove('open');
+});
+ 
+function exportDictationDoc(words, label){
+  const rows = words.map(w=>`
+    <tr>
+      <td style="width:35%;padding:10px;border:1px solid #999;font-size:14pt;font-family:'Courier New',monospace;">${escapeHtml(w)}</td>
+      <td style="width:65%;padding:10px;border:1px solid #999;">&nbsp;</td>
+    </tr>`).join('');
+  const html = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head><meta charset="utf-8"><title>${escapeHtml(label)}</title></head>
+<body>
+<h2 style="font-family:sans-serif;">默写表 · ${escapeHtml(label)}</h2>
+<p style="font-family:sans-serif;font-size:10pt;color:#666;">共 ${words.length} 个单词，姓名：___________　日期：___________</p>
+<table style="border-collapse:collapse;width:100%;">
+<tr><th style="border:1px solid #999;padding:8px;background:#eee;">单词</th><th style="border:1px solid #999;padding:8px;background:#eee;">释义 / 例句（默写）</th></tr>
+${rows}
+</table>
+</body></html>`;
+  const blob = new Blob(['\ufeff', html], {type:'application/msword'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `拾词-默写表-${label}.doc`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+ 
 // ---------- 总渲染 ----------
 function renderAll(){
   renderStats();
   renderDayList();
   renderMain();
 }
-renderAll();
+setActiveUser(state.activeUser);
 </script>
 </body>
 </html>
+ 
