@@ -8,18 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#1b2140;
-    --bg-alt:#242b52;
-    --bg-alt2:#2c3560;
-    --paper:#f4ecda;
-    --paper-alt:#ece0c4;
-    --ink:#2b2440;
-    --ink-soft:#655d78;
-    --gold:#c9a24b;
-    --gold-soft:#e3c778;
-    --teal:#3f8f82;
-    --coral:#c1554d;
-    --blue-gray:#6b7fa3;
+    --bg:#1b2140;--bg-alt:#242b52;--bg-alt2:#2c3560;
+    --paper:#f4ecda;--paper-alt:#ece0c4;--ink:#2b2440;--ink-soft:#655d78;
+    --gold:#c9a24b;--gold-soft:#e3c778;--teal:#3f8f82;--coral:#c1554d;--blue-gray:#6b7fa3;
+    --amber:#d98a3d;
     --line:rgba(201,162,75,0.28);
   }
   *{box-sizing:border-box;}
@@ -29,177 +21,84 @@
       radial-gradient(circle at 15% 0%, #2a3266 0%, transparent 45%),
       radial-gradient(circle at 90% 100%, #232a52 0%, transparent 40%),
       var(--bg);
-    color:var(--paper);
-    font-family:'Noto Sans SC', sans-serif;
-    min-height:100vh;
+    color:var(--paper);font-family:'Noto Sans SC', sans-serif;min-height:100vh;
   }
   .wrap{max-width:1080px;margin:0 auto;padding:32px 20px 80px;}
- 
-  header{
-    display:flex;justify-content:space-between;align-items:flex-end;
-    flex-wrap:wrap;gap:16px;
-    border-bottom:1px solid var(--line);
-    padding-bottom:20px;margin-bottom:20px;
-  }
-  header h1{
-    font-family:'Noto Serif SC', serif;
-    font-weight:700;font-size:30px;margin:0 0 4px;
-    letter-spacing:2px;color:var(--gold-soft);
-  }
+
+  header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:20px;}
+  header h1{font-family:'Noto Serif SC', serif;font-weight:700;font-size:30px;margin:0 0 4px;letter-spacing:2px;color:var(--gold-soft);}
   header p{margin:0;color:var(--paper-alt);opacity:0.65;font-size:13px;letter-spacing:1px;}
- 
+
   .top-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
   .user-switch{display:flex;gap:6px;background:var(--bg-alt2);padding:4px;border-radius:20px;border:1px solid var(--line);}
-  .user-switch button{
-    border:none;background:transparent;color:var(--paper-alt);
-    padding:6px 14px;border-radius:16px;font-size:12px;letter-spacing:1px;
-  }
+  .user-switch button{border:none;background:transparent;color:var(--paper-alt);padding:6px 14px;border-radius:16px;font-size:12px;letter-spacing:1px;}
   .user-switch button.active{background:var(--gold);color:var(--ink);font-weight:700;}
- 
+
   .stats{display:flex;gap:10px;flex-wrap:wrap;}
-  .stat-chip{
-    background:var(--bg-alt2);
-    border:1px solid var(--line);
-    border-radius:3px;
-    padding:8px 14px;
-    text-align:center;min-width:76px;
-  }
+  .stat-chip{background:var(--bg-alt2);border:1px solid var(--line);border-radius:3px;padding:8px 14px;text-align:center;min-width:76px;}
   .stat-chip b{display:block;font-family:'Noto Serif SC',serif;font-size:20px;color:var(--gold-soft);}
   .stat-chip span{font-size:11px;color:var(--paper-alt);opacity:0.7;}
- 
+
   .layout{display:grid;grid-template-columns:260px 1fr;gap:24px;}
   @media (max-width:800px){.layout{grid-template-columns:1fr;}}
- 
-  .panel{
-    background:var(--bg-alt);
-    border:1px solid var(--line);
-    border-radius:6px;
-    padding:18px;
-  }
+
+  .panel{background:var(--bg-alt);border:1px solid var(--line);border-radius:6px;padding:18px;}
   .panel + .panel{margin-top:20px;}
-  .panel h2{
-    font-family:'Noto Serif SC',serif;font-size:15px;margin:0 0 12px;
-    color:var(--gold-soft);letter-spacing:1px;
-    display:flex;align-items:center;gap:8px;
-  }
+  .panel h2{font-family:'Noto Serif SC',serif;font-size:15px;margin:0 0 12px;color:var(--gold-soft);letter-spacing:1px;display:flex;align-items:center;gap:8px;}
   .panel h2::before{content:'';width:10px;height:1px;background:var(--gold);}
- 
+
   label{display:block;font-size:12px;color:var(--paper-alt);opacity:0.75;margin:10px 0 5px;}
-  input[type=date], textarea, select{
-    width:100%;background:var(--bg);color:var(--paper);
-    border:1px solid var(--line);border-radius:4px;
-    padding:8px 10px;font-family:'Noto Sans SC',sans-serif;font-size:13px;
-  }
+  input[type=date], textarea, select{width:100%;background:var(--bg);color:var(--paper);border:1px solid var(--line);border-radius:4px;padding:8px 10px;font-family:'Noto Sans SC',sans-serif;font-size:13px;}
   textarea{min-height:110px;resize:vertical;line-height:1.6;}
   .hint{font-size:11px;color:var(--paper-alt);opacity:0.55;margin-top:5px;}
- 
-  button{
-    cursor:pointer;font-family:'Noto Sans SC',sans-serif;
-    border-radius:4px;border:1px solid var(--line);
-    background:var(--bg-alt2);color:var(--paper);
-    padding:9px 14px;font-size:13px;letter-spacing:0.5px;
-    transition:background .15s, border-color .15s;
-  }
+
+  button{cursor:pointer;font-family:'Noto Sans SC',sans-serif;border-radius:4px;border:1px solid var(--line);background:var(--bg-alt2);color:var(--paper);padding:9px 14px;font-size:13px;letter-spacing:0.5px;transition:background .15s, border-color .15s;}
   button:hover{border-color:var(--gold);background:#333c6e;}
   .btn-primary{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:700;}
   .btn-primary:hover{background:var(--gold-soft);}
   .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
- 
+
   .day-list{list-style:none;margin:0;padding:0;max-height:340px;overflow-y:auto;}
-  .day-list li{
-    display:flex;justify-content:space-between;align-items:center;
-    padding:9px 8px;border-radius:4px;cursor:pointer;
-    font-size:13px;color:var(--paper-alt);
-  }
+  .day-list li{display:flex;justify-content:space-between;align-items:center;padding:9px 8px;border-radius:4px;cursor:pointer;font-size:13px;color:var(--paper-alt);}
   .day-list li:hover{background:var(--bg-alt2);}
   .day-list li.active{background:var(--bg-alt2);color:var(--gold-soft);font-weight:700;}
   .day-list li .cnt{font-size:11px;opacity:0.6;font-family:'JetBrains Mono',monospace;}
- 
+
   .tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap;}
-  .tab-btn{
-    background:transparent;border:1px solid var(--line);
-    padding:8px 16px;border-radius:20px;font-size:13px;color:var(--paper-alt);
-  }
+  .tab-btn{background:transparent;border:1px solid var(--line);padding:8px 16px;border-radius:20px;font-size:13px;color:var(--paper-alt);}
   .tab-btn.active{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:700;}
- 
+
   .main-panel{min-height:400px;}
-  .main-panel-head{
-    display:flex;justify-content:space-between;align-items:center;
-    flex-wrap:wrap;gap:10px;margin-bottom:16px;
-  }
+  .main-panel-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;}
   .main-panel-head h2{margin:0;font-size:16px;}
-  .empty{
-    color:var(--paper-alt);opacity:0.55;font-size:13px;
-    padding:40px 10px;text-align:center;
-  }
- 
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(108px,1fr));
-    gap:12px;
-  }
- 
-  .word-card{
-    position:relative;
-    background:var(--paper);
-    color:var(--ink);
-    border-radius:3px;
-    padding:12px 10px 10px;
-    min-height:64px;
-    cursor:pointer;
-    font-family:'JetBrains Mono',monospace;
-    font-size:13px;
-    font-weight:700;
-    word-break:break-word;
-    box-shadow:0 3px 0 rgba(0,0,0,0.18);
-    border:1px dashed rgba(43,36,64,0.25);
-    transition:transform .1s;
-    user-select:none;
-  }
+  .empty{color:var(--paper-alt);opacity:0.55;font-size:13px;padding:40px 10px;text-align:center;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(108px,1fr));gap:12px;}
+
+  .word-card{position:relative;background:var(--paper);color:var(--ink);border-radius:3px;padding:12px 10px 10px;min-height:64px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;word-break:break-word;box-shadow:0 3px 0 rgba(0,0,0,0.18);border:1px dashed rgba(43,36,64,0.25);transition:transform .1s;user-select:none;}
   .word-card:hover{transform:translateY(-2px);}
-  .word-card .stamp{
-    position:absolute;top:-7px;right:-7px;
-    width:20px;height:20px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    font-size:10px;font-weight:700;color:#fff;
-    font-family:'Noto Sans SC',sans-serif;
-    border:2px solid var(--bg-alt);
-    transform:rotate(-8deg);
-  }
-  .word-card .rc{
-    margin-top:8px;font-size:10px;font-weight:400;
-    color:var(--ink-soft);letter-spacing:0.5px;
-    font-family:'Noto Sans SC',sans-serif;
-  }
+  .word-card.is-hard{box-shadow:0 3px 0 rgba(0,0,0,0.18), inset 0 0 0 2px var(--amber);}
+  .word-card .stamp{position:absolute;top:-7px;right:-7px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;font-family:'Noto Sans SC',sans-serif;border:2px solid var(--bg-alt);transform:rotate(-8deg);}
+  .word-card .rc{margin-top:8px;font-size:10px;font-weight:400;color:var(--ink-soft);letter-spacing:0.5px;font-family:'Noto Sans SC',sans-serif;}
   .st-new .stamp{background:var(--blue-gray);}
   .st-new{border-color:rgba(107,127,163,0.4);}
   .st-reviewed .stamp{background:var(--coral);}
   .st-reviewed{border-color:rgba(193,85,77,0.4);}
   .st-mastered .stamp{background:var(--teal);}
   .st-mastered{border-color:rgba(63,143,130,0.4); opacity:0.75;}
- 
-  .del-x{
-    position:absolute;bottom:-6px;left:-6px;
-    width:16px;height:16px;border-radius:50%;
-    background:var(--bg);color:var(--paper-alt);
-    font-size:10px;line-height:16px;text-align:center;
-    display:none;
-  }
+
+  .flag-toggle{position:absolute;top:-7px;left:-7px;width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;background:var(--paper-alt);border:2px solid var(--bg-alt);color:var(--ink-soft);opacity:0.55;}
+  .word-card.is-hard .flag-toggle{background:var(--amber);color:#fff;opacity:1;}
+
+  .del-x{position:absolute;bottom:-6px;left:-6px;width:16px;height:16px;border-radius:50%;background:var(--bg);color:var(--paper-alt);font-size:10px;line-height:16px;text-align:center;display:none;}
   .word-card:hover .del-x{display:block;}
- 
+
   .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--paper-alt);opacity:0.75;margin-top:16px;}
   .legend span{display:inline-flex;align-items:center;gap:5px;}
   .dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
- 
-  /* List 卡片（今日待复习分组）*/
-  .list-card{
-    border:1px solid var(--line);border-radius:6px;margin-bottom:12px;overflow:hidden;
-    background:var(--bg-alt2);
-  }
-  .list-card-head{
-    display:flex;justify-content:space-between;align-items:center;
-        padding:12px 14px;cursor:pointer;
-  }
+
+  .list-card{border:1px solid var(--line);border-radius:6px;margin-bottom:12px;overflow:hidden;background:var(--bg-alt2);}
+  .list-card-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;cursor:pointer;}
   .list-card-head:hover{background:#333c6e;}
   .list-card-head .lc-title{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold-soft);font-weight:700;}
   .list-card-head .lc-progress{font-size:12px;color:var(--paper-alt);opacity:0.75;}
@@ -207,58 +106,37 @@
   .list-card.open .lc-chevron{transform:rotate(90deg);}
   .list-card-body{padding:0 14px 14px;display:none;}
   .list-card.open .list-card-body{display:block;}
- 
-  /* 复习预告 */
+
   .forecast-range{display:flex;gap:8px;margin-bottom:16px;}
   .forecast-range button.active{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:700;}
-  .forecast-day{
-    border-left:2px solid var(--line);padding:4px 0 14px 16px;margin-left:6px;position:relative;
-  }
-  .forecast-day::before{
-    content:'';position:absolute;left:-5px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--gold);
-  }
+  .forecast-day{border-left:2px solid var(--line);padding:4px 0 14px 16px;margin-left:6px;position:relative;}
+  .forecast-day::before{content:'';position:absolute;left:-5px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--gold);}
   .forecast-day .fd-date{font-family:'Noto Serif SC',serif;color:var(--gold-soft);font-size:14px;margin-bottom:6px;}
-  .forecast-chip{
-    display:inline-block;background:var(--bg-alt2);border:1px solid var(--line);
-    border-radius:4px;padding:4px 10px;font-size:12px;margin:0 6px 6px 0;color:var(--paper-alt);
-  }
+  .forecast-chip{display:inline-block;background:var(--bg-alt2);border:1px solid var(--line);border-radius:4px;padding:4px 10px;font-size:12px;margin:0 6px 6px 0;color:var(--paper-alt);}
   .forecast-chip b{color:var(--gold-soft);font-family:'JetBrains Mono',monospace;}
- 
-  footer{
-    margin-top:30px;border-top:1px solid var(--line);
-    padding-top:18px;display:flex;justify-content:space-between;
-    flex-wrap:wrap;gap:10px;align-items:center;
-  }
+
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center;}
   footer p{font-size:11px;color:var(--paper-alt);opacity:0.5;margin:0;}
-  .import-label{
-    display:inline-block;padding:9px 14px;border:1px solid var(--line);
-    border-radius:4px;font-size:13px;cursor:pointer;
-  }
+  .import-label{display:inline-block;padding:9px 14px;border:1px solid var(--line);border-radius:4px;font-size:13px;cursor:pointer;}
   .import-label:hover{border-color:var(--gold);}
   #importFile{display:none;}
- 
-  /* 弹窗 */
-  .modal-overlay{
-    display:none;position:fixed;inset:0;background:rgba(10,12,28,0.7);
-    z-index:100;align-items:center;justify-content:center;padding:20px;
-  }
+
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,12,28,0.7);z-index:100;align-items:center;justify-content:center;padding:20px;}
   .modal-overlay.open{display:flex;}
-  .modal-box{
-    background:var(--bg-alt);border:1px solid var(--line);border-radius:8px;
-    padding:22px;max-width:420px;width:100%;
-  }
+  .modal-box{background:var(--bg-alt);border:1px solid var(--line);border-radius:8px;padding:22px;max-width:480px;width:100%;max-height:85vh;overflow-y:auto;}
   .modal-box h3{margin:0 0 14px;font-family:'Noto Serif SC',serif;color:var(--gold-soft);font-size:17px;}
   .radio-row{display:flex;align-items:center;gap:8px;margin:10px 0;font-size:13px;}
   .radio-row input{width:auto;}
   .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px;}
- 
+  #reportOutput{width:100%;min-height:280px;background:var(--bg);color:var(--paper);border:1px solid var(--line);border-radius:4px;padding:12px;font-size:12px;line-height:1.7;font-family:'JetBrains Mono',monospace;white-space:pre-wrap;}
+
   ::-webkit-scrollbar{width:8px;}
   ::-webkit-scrollbar-thumb{background:var(--bg-alt2);border-radius:4px;}
 </style>
 </head>
 <body>
 <div class="wrap">
- 
+
   <header>
     <div>
       <h1>拾 词</h1>
@@ -272,7 +150,7 @@
       <div class="stats" id="statsRow"></div>
     </div>
   </header>
- 
+
   <div class="layout">
     <div>
       <div class="panel">
@@ -281,34 +159,33 @@
         <input type="date" id="dateInput">
         <label for="wordsInput">单词（换行 / 逗号 / 空格 分隔均可）</label>
         <textarea id="wordsInput" placeholder="例如：&#10;abandon&#10;benevolent, candid&#10;diligent"></textarea>
-        <div class="hint">建议每天 35–60 个，也可分多次追加到同一天</div>
-        <div class="btn-row">
-          <button class="btn-primary" id="addBtn">加入词表</button>
-        </div>
+        <div class="hint">同一天多次添加会合并成同一个 List</div>
+        <div class="btn-row"><button class="btn-primary" id="addBtn">加入词表</button></div>
       </div>
- 
+
       <div class="panel">
         <h2>按日期浏览</h2>
         <ul class="day-list" id="dayList"></ul>
       </div>
- 
+
       <div class="panel">
-        <h2>导出</h2>
+        <h2>导出 / 报告</h2>
         <div class="btn-row" style="margin-top:0;">
+          <button id="openReportModal">📊 生成周报</button>
           <button id="openExportModal">📝 默写表 (Word)</button>
           <button id="exportCsv">导出 CSV</button>
           <button id="exportJson">导出 JSON 备份</button>
         </div>
       </div>
     </div>
- 
+
     <div>
       <div class="tabs">
         <button class="tab-btn active" data-tab="review" id="tabReview">今日待复习</button>
         <button class="tab-btn" data-tab="day" id="tabDay">按日查看</button>
         <button class="tab-btn" data-tab="forecast" id="tabForecast">复习预告</button>
       </div>
- 
+
       <div class="panel main-panel">
         <div class="main-panel-head">
           <h2 id="mainTitle">今日待复习</h2>
@@ -317,13 +194,14 @@
         <div id="mainBody"></div>
         <div class="legend" id="mainLegend">
           <span><i class="dot" style="background:var(--blue-gray)"></i>未复习</span>
-          <span><i class="dot" style="background:var(--coral)"></i>复习中（未到掌握）</span>
+          <span><i class="dot" style="background:var(--coral)"></i>复习中</span>
           <span><i class="dot" style="background:var(--teal)"></i>已掌握</span>
+          <span>⚠ 橙色边框 = 标记为易忘</span>
         </div>
       </div>
     </div>
   </div>
- 
+
   <footer>
     <p>数据仅保存在本浏览器（localStorage），换设备/清缓存前请导出备份</p>
     <div class="btn-row" style="margin-top:0;">
@@ -332,38 +210,39 @@
     </div>
   </footer>
 </div>
- 
+
 <!-- 导出默写表弹窗 -->
 <div class="modal-overlay" id="exportModal">
   <div class="modal-box">
     <h3>导出默写表 (Word)</h3>
-    <div class="radio-row">
-      <input type="radio" name="exportScope" id="scopeList" value="list" checked>
-      <label style="margin:0;" for="scopeList">指定某天 List</label>
-    </div>
+    <div class="radio-row"><input type="radio" name="exportScope" id="scopeList" value="list" checked><label style="margin:0;" for="scopeList">指定某个 List</label></div>
     <select id="scopeListSelect"></select>
-    <div class="radio-row">
-      <input type="radio" name="exportScope" id="scopeDue" value="due">
-      <label style="margin:0;" for="scopeDue">今日待复习（全部到期单词）</label>
-    </div>
-    <div class="radio-row" style="margin-top:16px;">
-      <input type="checkbox" id="shuffleExport" checked>
-      <label style="margin:0;" for="shuffleExport">导出前随机打乱顺序</label>
-    </div>
+    <div class="radio-row"><input type="radio" name="exportScope" id="scopeDue" value="due"><label style="margin:0;" for="scopeDue">今日待复习（全部到期单词）</label></div>
+    <div class="radio-row" style="margin-top:16px;"><input type="checkbox" id="shuffleExport" checked><label style="margin:0;" for="shuffleExport">导出前随机打乱顺序</label></div>
+    <div class="modal-actions"><button id="cancelExport">取消</button><button class="btn-primary" id="confirmExport">生成并下载</button></div>
+  </div>
+</div>
+
+<!-- 周报弹窗 -->
+<div class="modal-overlay" id="reportModal">
+  <div class="modal-box">
+    <h3>学习周报</h3>
+    <div class="hint" style="margin-bottom:10px;">自动生成本周（周一至今）与上周对比，可直接复制发给家长</div>
+    <textarea id="reportOutput" readonly></textarea>
     <div class="modal-actions">
-      <button id="cancelExport">取消</button>
-      <button class="btn-primary" id="confirmExport">生成并下载</button>
+      <button id="closeReport">关闭</button>
+      <button class="btn-primary" id="copyReport">复制文字</button>
     </div>
   </div>
 </div>
- 
+
 <script>
 // ---------- 基础配置 ----------
 const V2_KEY = 'shici-vocab-data-v2';
 const V1_KEY = 'shici-vocab-data-v1';
-const INTERVALS = [1,2,4,7,11,15,21,30]; // 复习间隔（天），共 8 轮判定掌握
- 
-// ---------- 数据层（含从 v1 单用户格式迁移）----------
+const INTERVALS = [1,2,4,7,11,15,21,30];
+
+// ---------- 数据层 ----------
 function loadData(){
   try{
     const rawV2 = localStorage.getItem(V2_KEY);
@@ -372,39 +251,41 @@ function loadData(){
   let migratedDays = {};
   try{
     const rawV1 = localStorage.getItem(V1_KEY);
-    if(rawV1){
-      const old = JSON.parse(rawV1);
-      if(old && old.days) migratedDays = old.days;
-    }
+    if(rawV1){ const old = JSON.parse(rawV1); if(old && old.days) migratedDays = old.days; }
   }catch(e){}
   return { activeUser:'student', users:{ student:{days:migratedDays}, me:{days:{}} } };
 }
-function saveData(){
-  localStorage.setItem(V2_KEY, JSON.stringify(state));
-}
+function saveData(){ localStorage.setItem(V2_KEY, JSON.stringify(state)); }
 let state = loadData();
 if(!state.users) state.users = {student:{days:{}}, me:{days:{}}};
 if(!state.activeUser) state.activeUser = 'student';
- 
-function currentDays(){
-  return state.users[state.activeUser].days;
-}
- 
+// 补齐字段（老数据兼容）
+Object.values(state.users).forEach(u=>{
+  Object.values(u.days||{}).forEach(words=>{
+    words.forEach(w=>{
+      if(w.reviewLog===undefined) w.reviewLog = [];
+      if(w.hard===undefined) w.hard = false;
+      if(w.masteredDate===undefined) w.masteredDate = w.status==='mastered' ? (w.lastReviewDate||null) : null;
+    });
+  });
+});
+
+function currentDays(){ return state.users[state.activeUser].days; }
+
 // ---------- 日期工具 ----------
 function todayISO(){ return isoLocal(new Date()); }
-function isoLocal(d){
-  const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0');
-  return `${y}-${m}-${day}`;
-}
-function addDays(iso, n){
+function isoLocal(d){ const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0'); return `${y}-${m}-${day}`; }
+function addDays(iso, n){ const d = new Date(iso+'T00:00:00'); d.setDate(d.getDate()+n); return isoLocal(d); }
+function getMonday(iso){
   const d = new Date(iso+'T00:00:00');
-  d.setDate(d.getDate()+n);
+  const dow = d.getDay(); // 0=Sun..6=Sat
+  const diff = dow===0 ? -6 : 1-dow;
+  d.setDate(d.getDate()+diff);
   return isoLocal(d);
 }
- 
+
 // ---------- 单词模型 ----------
 function makeId(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
- 
 function nextDueDate(word, dateAdded){
   const base = word.lastReviewDate || dateAdded;
   const idx = Math.min(word.reviewCount, INTERVALS.length-1);
@@ -414,12 +295,23 @@ function isDueToday(word, dateAdded){
   if(word.status === 'mastered') return false;
   return nextDueDate(word, dateAdded) <= todayISO();
 }
- 
+
+// ---------- List 序号 ----------
+function listNumberMap(){
+  const days = currentDays();
+  const sortedDates = Object.keys(days).sort();
+  const map = {};
+  sortedDates.forEach((d,i)=> map[d]=i+1 );
+  return map;
+}
+function listLabel(date){
+  const map = listNumberMap();
+  return `${date} List${map[date]||'?'}`;
+}
+
 // ---------- 用户切换 ----------
 function setActiveUser(u){
-  state.activeUser = u;
-  selectedDate = null;
-  expandedLists = new Set();
+  state.activeUser = u; selectedDate = null; expandedLists = new Set();
   saveData();
   document.getElementById('userStudentBtn').classList.toggle('active', u==='student');
   document.getElementById('userMeBtn').classList.toggle('active', u==='me');
@@ -428,7 +320,7 @@ function setActiveUser(u){
 }
 document.getElementById('userStudentBtn').addEventListener('click', ()=>setActiveUser('student'));
 document.getElementById('userMeBtn').addEventListener('click', ()=>setActiveUser('me'));
- 
+
 // ---------- 添加单词 ----------
 document.getElementById('dateInput').value = todayISO();
 document.getElementById('addBtn').addEventListener('click', ()=>{
@@ -439,32 +331,30 @@ document.getElementById('addBtn').addEventListener('click', ()=>{
   const days = currentDays();
   if(!days[dateVal]) days[dateVal] = [];
   words.forEach(w=>{
-    days[dateVal].push({id:makeId(), text:w, status:'new', reviewCount:0, lastReviewDate:null});
+    days[dateVal].push({id:makeId(), text:w, status:'new', reviewCount:0, lastReviewDate:null, reviewLog:[], hard:false, masteredDate:null});
   });
   document.getElementById('wordsInput').value='';
-  saveData();
-  renderAll();
+  saveData(); renderAll();
 });
- 
+
 // ---------- Tab 状态 ----------
 let currentTab = 'review';
 let selectedDate = null;
 let shuffleSeed = null;
 let expandedLists = new Set();
 let forecastRange = 7;
- 
+
 document.getElementById('tabReview').addEventListener('click', ()=>{ currentTab='review'; setActiveTab(); renderMain(); });
 document.getElementById('tabDay').addEventListener('click', ()=>{ currentTab='day'; setActiveTab(); renderMain(); });
 document.getElementById('tabForecast').addEventListener('click', ()=>{ currentTab='forecast'; setActiveTab(); renderMain(); });
- 
 function setActiveTab(){
   document.getElementById('tabReview').classList.toggle('active', currentTab==='review');
   document.getElementById('tabDay').classList.toggle('active', currentTab==='day');
   document.getElementById('tabForecast').classList.toggle('active', currentTab==='forecast');
   document.getElementById('mainLegend').style.display = currentTab==='forecast' ? 'none' : 'flex';
 }
- 
-// ---------- 渲染：统计条 ----------
+
+// ---------- 统计条 ----------
 function renderStats(){
   let totalWords=0, dueToday=0, mastered=0, todayNew=0;
   const t = todayISO();
@@ -478,80 +368,71 @@ function renderStats(){
     if(date===t) todayNew += words.length;
   });
   const chips = [['总词数', totalWords],['今日新词', todayNew],['待复习', dueToday],['已掌握', mastered]];
-  document.getElementById('statsRow').innerHTML = chips.map(([label,val])=>
-    `<div class="stat-chip"><b>${val}</b><span>${label}</span></div>`
-  ).join('');
+  document.getElementById('statsRow').innerHTML = chips.map(([label,val])=>`<div class="stat-chip"><b>${val}</b><span>${label}</span></div>`).join('');
 }
- 
-// ---------- 渲染：日期侧栏 ----------
+
+// ---------- 日期侧栏 ----------
 function renderDayList(){
   const days = currentDays();
   const dates = Object.keys(days).sort().reverse();
   const list = document.getElementById('dayList');
-  if(dates.length===0){
-    list.innerHTML = '<li style="opacity:.5;cursor:default;">还没有记录，先在左上添加一天的单词吧</li>';
-    return;
-  }
+  if(dates.length===0){ list.innerHTML = '<li style="opacity:.5;cursor:default;">还没有记录，先在左上添加一天的单词吧</li>'; return; }
   if(!selectedDate || !days[selectedDate]) selectedDate = dates[0];
+  const map = listNumberMap();
   list.innerHTML = dates.map(date=>{
     const words = days[date];
-    return `<li data-date="${date}" class="${date===selectedDate?'active':''}">
-      <span>${date}</span><span class="cnt">${words.length} 词</span>
-    </li>`;
+    return `<li data-date="${date}" class="${date===selectedDate?'active':''}"><span>${date} · List${map[date]}</span><span class="cnt">${words.length} 词</span></li>`;
   }).join('');
   list.querySelectorAll('li[data-date]').forEach(li=>{
     li.addEventListener('click', ()=>{
-      selectedDate = li.dataset.date;
-      currentTab = 'day';
-      setActiveTab();
-      renderDayList();
-      renderMain();
+      selectedDate = li.dataset.date; currentTab='day'; setActiveTab(); renderDayList(); renderMain();
     });
   });
 }
- 
+
 // ---------- 状态切换 ----------
 function cycleStatus(date, wordId){
-  const days = currentDays();
-  const word = days[date].find(w=>w.id===wordId);
+  const word = currentDays()[date].find(w=>w.id===wordId);
   if(!word) return;
   if(word.status==='new'){
-    word.status='reviewed'; word.reviewCount=1; word.lastReviewDate=todayISO();
+    word.status='reviewed'; word.reviewCount=1; word.lastReviewDate=todayISO(); word.reviewLog.push(todayISO());
   } else if(word.status==='reviewed'){
-    word.reviewCount++;
-    word.lastReviewDate=todayISO();
-    if(word.reviewCount>=INTERVALS.length) word.status='mastered';
+    word.reviewCount++; word.lastReviewDate=todayISO(); word.reviewLog.push(todayISO());
+    if(word.reviewCount>=INTERVALS.length){ word.status='mastered'; word.masteredDate=todayISO(); }
   } else {
-    word.status='new'; word.reviewCount=0; word.lastReviewDate=null;
+    word.status='new'; word.reviewCount=0; word.lastReviewDate=null; word.masteredDate=null;
   }
-  saveData();
-  renderAll();
+  saveData(); renderAll();
+}
+function toggleHard(date, wordId){
+  const word = currentDays()[date].find(w=>w.id===wordId);
+  if(!word) return;
+  word.hard = !word.hard;
+  saveData(); renderAll();
 }
 function deleteWord(date, wordId){
   const days = currentDays();
   days[date] = days[date].filter(w=>w.id!==wordId);
   if(days[date].length===0) delete days[date];
-  saveData();
-  renderAll();
+  saveData(); renderAll();
 }
 function markReviewedFromQueue(date, wordId){
-  const days = currentDays();
-  const word = days[date].find(w=>w.id===wordId);
+  const word = currentDays()[date].find(w=>w.id===wordId);
   if(!word) return;
-  word.reviewCount++;
-  word.lastReviewDate = todayISO();
+  word.reviewCount++; word.lastReviewDate = todayISO(); word.reviewLog.push(todayISO());
   word.status = word.reviewCount>=INTERVALS.length ? 'mastered' : 'reviewed';
-  saveData();
-  renderAll();
+  if(word.status==='mastered') word.masteredDate = todayISO();
+  saveData(); renderAll();
 }
- 
+
 // ---------- 渲染单词块 ----------
 function wordCard(date, word, opts={}){
   const stCls = word.status==='mastered' ? 'st-mastered' : (word.status==='new'?'st-new':'st-reviewed');
   const rc = word.status==='new' ? '未复习' : (word.status==='mastered' ? '已掌握' : `第 ${word.reviewCount} 轮`);
   const card = document.createElement('div');
-  card.className = `word-card ${stCls}`;
+  card.className = `word-card ${stCls}${word.hard?' is-hard':''}`;
   card.innerHTML = `
+    <span class="flag-toggle" title="标记易忘">⚠</span>
     <span class="stamp">${word.status==='mastered'?'✓':word.reviewCount}</span>
     <div>${escapeHtml(word.text)}</div>
     <div class="rc">${rc}</div>
@@ -561,77 +442,66 @@ function wordCard(date, word, opts={}){
     if(opts.reviewMode) markReviewedFromQueue(date, word.id);
     else cycleStatus(date, word.id);
   });
+  card.querySelector('.flag-toggle').addEventListener('click', (e)=>{ e.stopPropagation(); toggleHard(date, word.id); });
   card.querySelector('.del-x').addEventListener('click', (e)=>{
     e.stopPropagation();
     if(confirm(`删除单词 "${word.text}"？`)) deleteWord(date, word.id);
   });
   return card;
 }
-function escapeHtml(s){
-  const d = document.createElement('div'); d.textContent = s; return d.innerHTML;
-}
+function escapeHtml(s){ const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 function shuffleArray(arr){
   const a = arr.slice();
-  for(let i=a.length-1;i>0;i--){
-    const j = Math.floor(Math.random()*(i+1));
-    [a[i],a[j]]=[a[j],a[i]];
-  }
+  for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
   return a;
 }
- 
-// ---------- 渲染主区域 ----------
+
+// ---------- 主区域渲染 ----------
 function renderMain(){
   const title = document.getElementById('mainTitle');
   const body = document.getElementById('mainBody');
   const actions = document.getElementById('mainActions');
-  body.innerHTML = '';
-  actions.innerHTML = '';
+  body.innerHTML=''; actions.innerHTML='';
   const days = currentDays();
- 
-  if(currentTab === 'review'){
-    renderReviewTab(title, body, actions, days);
-  } else if(currentTab === 'day'){
-    renderDayTab(title, body, actions, days);
-  } else {
-    renderForecastTab(title, body, actions, days);
-  }
+  if(currentTab==='review') renderReviewTab(title, body, actions, days);
+  else if(currentTab==='day') renderDayTab(title, body, actions, days);
+  else renderForecastTab(title, body, actions, days);
 }
- 
+
 function renderReviewTab(title, body, actions, days){
   title.textContent = '今日待复习（按 List 分组）';
-   
-  // 按日期分组待复习单词
-  const groups = []; // {date, dueWords:[]}
+  const map = listNumberMap();
+  const groups = [];
   Object.keys(days).sort().forEach(date=>{
     const due = days[date].filter(w=>isDueToday(w, date));
-    if(due.length>0) groups.push({date, dueWords: due, total: days[date].length});
+    if(due.length>0) groups.push({date, dueWords:due, total:days[date].length});
   });
- 
+
   const shuffleBtn = document.createElement('button');
   shuffleBtn.textContent = '乱序 🔀';
   shuffleBtn.addEventListener('click', ()=>{ shuffleSeed = Math.random(); renderMain(); });
   actions.appendChild(shuffleBtn);
- 
+
   if(groups.length>0){
     const allBtn = document.createElement('button');
     allBtn.textContent = '全部标记为已复习一轮';
     allBtn.className='btn-primary';
     allBtn.addEventListener('click', ()=>{
       groups.forEach(g=>g.dueWords.forEach(word=>{
-        word.reviewCount++;
-        word.lastReviewDate = todayISO();
+        word.reviewCount++; word.lastReviewDate = todayISO(); word.reviewLog.push(todayISO());
         word.status = word.reviewCount>=INTERVALS.length ? 'mastered' : 'reviewed';
+        if(word.status==='mastered') word.masteredDate = todayISO();
       }));
       saveData(); renderAll();
     });
     actions.appendChild(allBtn);
   }
- 
+
   if(groups.length===0){
     body.innerHTML = '<div class="empty">今天没有到期需要复习的单词 🌙<br>可以看看「复习预告」了解未来安排</div>';
     return;
   }
- 
+
   groups.forEach(g=>{
     const isOpen = expandedLists.has(g.date);
     const card = document.createElement('div');
@@ -639,46 +509,40 @@ function renderReviewTab(title, body, actions, days){
     const head = document.createElement('div');
     head.className = 'list-card-head';
     head.innerHTML = `
-      <span class="lc-title">List · ${g.date}</span>
+      <span class="lc-title">${g.date} List${map[g.date]}</span>
       <span style="display:flex;align-items:center;gap:10px;">
         <span class="lc-progress">${g.dueWords.length}/${g.total} 待复习</span>
         <span class="lc-chevron">▶</span>
-      </span>
-    `;
+      </span>`;
     head.addEventListener('click', ()=>{
-      if(expandedLists.has(g.date)) expandedLists.delete(g.date);
-      else expandedLists.add(g.date);
+      if(expandedLists.has(g.date)) expandedLists.delete(g.date); else expandedLists.add(g.date);
       renderMain();
     });
     const bodyDiv = document.createElement('div');
     bodyDiv.className = 'list-card-body';
     const grid = document.createElement('div');
-    grid.className = 'grid';
+    grid.className='grid';
     let words = g.dueWords;
     if(shuffleSeed) words = shuffleArray(words);
     words.forEach(w=> grid.appendChild(wordCard(g.date, w, {reviewMode:true})) );
     bodyDiv.appendChild(grid);
-    card.appendChild(head);
-    card.appendChild(bodyDiv);
+    card.appendChild(head); card.appendChild(bodyDiv);
     body.appendChild(card);
   });
 }
- 
+
 function renderDayTab(title, body, actions, days){
   const dates = Object.keys(days).sort().reverse();
-  if(dates.length===0){
-    title.textContent = '按日查看';
-    body.innerHTML = '<div class="empty">还没有任何记录</div>';
-    return;
-  }
+  if(dates.length===0){ title.textContent='按日查看'; body.innerHTML='<div class="empty">还没有任何记录</div>'; return; }
   if(!selectedDate || !days[selectedDate]) selectedDate = dates[0];
-  title.textContent = `${selectedDate} 的单词（共 ${days[selectedDate].length} 个）`;
- 
+  const map = listNumberMap();
+  title.textContent = `${selectedDate} List${map[selectedDate]}（共 ${days[selectedDate].length} 个）`;
+
   const shuffleBtn = document.createElement('button');
   shuffleBtn.textContent = '乱序 🔀';
   shuffleBtn.addEventListener('click', ()=>{ shuffleSeed = Math.random(); renderMain(); });
   actions.appendChild(shuffleBtn);
- 
+
   let words = days[selectedDate].slice();
   if(shuffleSeed) words = shuffleArray(words);
   const grid = document.createElement('div');
@@ -686,10 +550,9 @@ function renderDayTab(title, body, actions, days){
   words.forEach(word=> grid.appendChild(wordCard(selectedDate, word, {reviewMode:false})) );
   body.appendChild(grid);
 }
- 
+
 function renderForecastTab(title, body, actions, days){
   title.textContent = '复习预告';
- 
   const rangeWrap = document.createElement('div');
   rangeWrap.className = 'forecast-range';
   [7,14,30].forEach(n=>{
@@ -700,30 +563,27 @@ function renderForecastTab(title, body, actions, days){
     rangeWrap.appendChild(b);
   });
   body.appendChild(rangeWrap);
- 
+
   const today = todayISO();
-  // 收集所有未掌握单词的下次到期日，按日期分组，再按来源 list 细分
-  const byDate = {}; // date -> {listDate -> count}
+  const map = listNumberMap();
+  const byDate = {};
   Object.entries(days).forEach(([listDate, words])=>{
     words.forEach(w=>{
       if(w.status==='mastered') return;
       const due = nextDueDate(w, listDate);
-      if(due <= today) return; // 今天/已过期的在「今日待复习」里
+      if(due <= today) return;
       if(due > addDays(today, forecastRange)) return;
       if(!byDate[due]) byDate[due] = {};
       byDate[due][listDate] = (byDate[due][listDate]||0) + 1;
     });
   });
- 
+
   const sortedDates = Object.keys(byDate).sort();
   if(sortedDates.length===0){
     const empty = document.createElement('div');
-    empty.className='empty';
-    empty.textContent = `未来 ${forecastRange} 天内暂时没有排到期的复习～`;
-    body.appendChild(empty);
-    return;
+    empty.className='empty'; empty.textContent = `未来 ${forecastRange} 天内暂时没有排到期的复习～`;
+    body.appendChild(empty); return;
   }
- 
   sortedDates.forEach(date=>{
     const dayDiv = document.createElement('div');
     dayDiv.className = 'forecast-day';
@@ -733,18 +593,19 @@ function renderForecastTab(title, body, actions, days){
     Object.entries(listBreak).sort().forEach(([listDate, cnt])=>{
       const chip = document.createElement('span');
       chip.className = 'forecast-chip';
-      chip.innerHTML = `List·${listDate} <b>${cnt}</b> 词`;
+      chip.innerHTML = `${listDate} List${map[listDate]} <b>${cnt}</b> 词`;
       dayDiv.appendChild(chip);
     });
     body.appendChild(dayDiv);
   });
 }
- 
+
 // ---------- 导出：CSV / JSON ----------
 document.getElementById('exportCsv').addEventListener('click', ()=>{
-  let rows = [['日期','单词','状态','复习轮数','下次到期日']];
+  const map = listNumberMap();
+  let rows = [['日期','List','单词','状态','复习轮数','下次到期日','易忘']];
   Object.entries(currentDays()).forEach(([date, words])=>{
-    words.forEach(w=> rows.push([date, w.text, w.status, w.reviewCount, nextDueDate(w,date)]) );
+    words.forEach(w=> rows.push([date, `List${map[date]}`, w.text, w.status, w.reviewCount, nextDueDate(w,date), w.hard?'是':'']) );
   });
   const csv = rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
   downloadBlob(csv, `拾词-${state.activeUser}-导出-${todayISO()}.csv`, 'text/csv;charset=utf-8;', true);
@@ -765,6 +626,11 @@ document.getElementById('importFile').addEventListener('change', (e)=>{
           if(!state.users[uname]) state.users[uname] = {days:{}};
           Object.entries(udata.days||{}).forEach(([date, words])=>{
             if(!state.users[uname].days[date]) state.users[uname].days[date]=[];
+            words.forEach(w=>{
+              if(w.reviewLog===undefined) w.reviewLog=[];
+              if(w.hard===undefined) w.hard=false;
+              if(w.masteredDate===undefined) w.masteredDate=null;
+            });
             state.users[uname].days[date] = state.users[uname].days[date].concat(words);
           });
         });
@@ -784,33 +650,31 @@ function downloadBlob(content, filename, type, bom){
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
- 
+
 // ---------- 导出：Word 默写表 ----------
 const exportModal = document.getElementById('exportModal');
 document.getElementById('openExportModal').addEventListener('click', ()=>{
   const sel = document.getElementById('scopeListSelect');
+  const map = listNumberMap();
   const dates = Object.keys(currentDays()).sort().reverse();
-  sel.innerHTML = dates.map(d=>`<option value="${d}">${d}（${currentDays()[d].length} 词）</option>`).join('');
+  sel.innerHTML = dates.map(d=>`<option value="${d}">${d} List${map[d]}（${currentDays()[d].length} 词）</option>`).join('');
   exportModal.classList.add('open');
 });
 document.getElementById('cancelExport').addEventListener('click', ()=> exportModal.classList.remove('open') );
 exportModal.addEventListener('click', (e)=>{ if(e.target===exportModal) exportModal.classList.remove('open'); });
- 
 document.getElementById('confirmExport').addEventListener('click', ()=>{
   const scope = document.querySelector('input[name=exportScope]:checked').value;
   const doShuffle = document.getElementById('shuffleExport').checked;
   const days = currentDays();
-  let words = [];
-  let label = '';
+  const map = listNumberMap();
+  let words = []; let label = '';
   if(scope==='list'){
     const d = document.getElementById('scopeListSelect').value;
     if(!d){ alert('还没有任何 List 可以导出'); return; }
     words = days[d].map(w=>w.text);
-    label = `List-${d}`;
+    label = `${d}-List${map[d]}`;
   } else {
-    Object.entries(days).forEach(([date, ws])=>{
-      ws.forEach(w=>{ if(isDueToday(w, date)) words.push(w.text); });
-    });
+    Object.entries(days).forEach(([date, ws])=>{ ws.forEach(w=>{ if(isDueToday(w, date)) words.push(w.text); }); });
     if(words.length===0){ alert('今天没有待复习的单词'); return; }
     label = `今日待复习-${todayISO()}`;
   }
@@ -818,13 +682,8 @@ document.getElementById('confirmExport').addEventListener('click', ()=>{
   exportDictationDoc(words, label);
   exportModal.classList.remove('open');
 });
- 
 function exportDictationDoc(words, label){
-  const rows = words.map(w=>`
-    <tr>
-      <td style="width:35%;padding:10px;border:1px solid #999;font-size:14pt;font-family:'Courier New',monospace;">${escapeHtml(w)}</td>
-      <td style="width:65%;padding:10px;border:1px solid #999;">&nbsp;</td>
-    </tr>`).join('');
+  const rows = words.map(w=>`<tr><td style="width:35%;padding:10px;border:1px solid #999;font-size:14pt;font-family:'Courier New',monospace;">${escapeHtml(w)}</td><td style="width:65%;padding:10px;border:1px solid #999;">&nbsp;</td></tr>`).join('');
   const html = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
 <head><meta charset="utf-8"><title>${escapeHtml(label)}</title></head>
 <body>
@@ -842,15 +701,107 @@ ${rows}
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
- 
-// ---------- 总渲染 ----------
-function renderAll(){
-  renderStats();
-  renderDayList();
-  renderMain();
+
+// ---------- 周报 ----------
+function rangeStats(start, end){
+  const days = currentDays();
+  const map = listNumberMap();
+  let newWords=0, reviewActions=0, mastered=0;
+  const perDay = [];
+  Object.keys(days).sort().forEach(date=>{
+    if(date>=start && date<=end){
+      newWords += days[date].length;
+      perDay.push({date, listNum:map[date], count:days[date].length});
+    }
+  });
+  Object.values(days).forEach(words=>{
+    words.forEach(w=>{
+      (w.reviewLog||[]).forEach(rd=>{ if(rd>=start && rd<=end) reviewActions++; });
+      if(w.masteredDate && w.masteredDate>=start && w.masteredDate<=end) mastered++;
+    });
+  });
+  return {newWords, reviewActions, mastered, perDay};
 }
+function currentBacklog(){
+  const days = currentDays();
+  let n=0;
+  Object.entries(days).forEach(([date,words])=>{ words.forEach(w=>{ if(isDueToday(w,date)) n++; }); });
+  return n;
+}
+function fmtDelta(cur, prev){
+  const d = cur - prev;
+  if(d===0) return '持平';
+  return d>0 ? `+${d}` : `${d}`;
+}
+function generateReport(){
+  const today = todayISO();
+  const thisMonday = getMonday(today);
+  const thisEnd = today;
+  const lastMonday = addDays(thisMonday, -7);
+  const lastEnd = addDays(thisMonday, -1);
+
+  const thisStats = rangeStats(thisMonday, thisEnd);
+  const lastStats = rangeStats(lastMonday, lastEnd);
+  const backlog = currentBacklog();
+  const completion = thisStats.reviewActions + backlog > 0
+    ? Math.round(thisStats.reviewActions / (thisStats.reviewActions + backlog) * 100)
+    : 100;
+
+  const userLabel = state.activeUser==='student' ? '学生' : '我';
+  const ongoing = thisEnd < addDays(thisMonday,6);
+
+  let lines = [];
+  lines.push('【学习周报】');
+  lines.push(`对象：${userLabel}`);
+  lines.push(`本周：${thisMonday} ~ ${thisEnd}${ongoing?'（进行中）':''}`);
+  lines.push('');
+  lines.push('一、本周学习概况');
+  lines.push(`新学单词：${thisStats.newWords} 个`);
+  lines.push(`复习次数：${thisStats.reviewActions} 次`);
+  lines.push(`本周复习完成率：${completion}%（已完成 ${thisStats.reviewActions} 次，当前仍有 ${backlog} 个单词待复习）`);
+  lines.push('');
+  lines.push('二、每日完成情况');
+  if(thisStats.perDay.length===0){
+    lines.push('本周暂无新增 List');
+  } else {
+    thisStats.perDay.forEach(d=> lines.push(`${d.date} List${d.listNum}：${d.count} 词`) );
+  }
+  lines.push('');
+  lines.push('三、与上周对比');
+  lines.push(`新学单词：${thisStats.newWords} 个（上周 ${lastStats.newWords} 个，${fmtDelta(thisStats.newWords,lastStats.newWords)}）`);
+  lines.push(`复习次数：${thisStats.reviewActions} 次（上周 ${lastStats.reviewActions} 次，${fmtDelta(thisStats.reviewActions,lastStats.reviewActions)}）`);
+  lines.push(`新掌握单词：${thisStats.mastered} 个（上周 ${lastStats.mastered} 个，${fmtDelta(thisStats.mastered,lastStats.mastered)}）`);
+  lines.push('');
+  lines.push(`——生成时间：${today}`);
+  return lines.join('\n');
+}
+const reportModal = document.getElementById('reportModal');
+document.getElementById('openReportModal').addEventListener('click', ()=>{
+  document.getElementById('reportOutput').value = generateReport();
+  reportModal.classList.add('open');
+});
+document.getElementById('closeReport').addEventListener('click', ()=> reportModal.classList.remove('open') );
+reportModal.addEventListener('click', (e)=>{ if(e.target===reportModal) reportModal.classList.remove('open'); });
+document.getElementById('copyReport').addEventListener('click', ()=>{
+  const ta = document.getElementById('reportOutput');
+  ta.select();
+  ta.setSelectionRange(0, 999999);
+  try{
+    navigator.clipboard.writeText(ta.value).then(()=>{
+      alert('已复制到剪贴板！');
+    }).catch(()=>{
+      document.execCommand('copy');
+      alert('已复制到剪贴板！');
+    });
+  }catch(e){
+    document.execCommand('copy');
+    alert('已复制到剪贴板！');
+  }
+});
+
+// ---------- 总渲染 ----------
+function renderAll(){ renderStats(); renderDayList(); renderMain(); }
 setActiveUser(state.activeUser);
 </script>
 </body>
 </html>
- 
